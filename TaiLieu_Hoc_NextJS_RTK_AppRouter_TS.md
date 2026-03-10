@@ -52,6 +52,59 @@
 - State dung de luu trang thai ben trong component.
 - Event handling: `onClick`, `onChange`, `onSubmit`.
 
+Vi du nhanh:
+
+```tsx
+type HelloProps = { name: string };
+
+function Hello({ name }: HelloProps) {
+  return <h1>Xin chao {name}</h1>;
+}
+```
+
+- `Hello` la component.
+- `name` la props truyen vao.
+
+Vi du rieng cho Props (cha -> con):
+
+```tsx
+type UserCardProps = {
+  name: string;
+  age: number;
+};
+
+function UserCard({ name, age }: UserCardProps) {
+  return <p>{name} - {age} tuoi</p>;
+}
+
+export default function Parent() {
+  return <UserCard name="Son" age={25} />;
+}
+```
+
+- `Parent` (cha) truyen du lieu cho `UserCard` (con) qua props.
+- Component con khong duoc sua truc tiep props.
+
+Vi du rieng cho State (trang thai noi bo):
+
+```tsx
+"use client";
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount((v) => v + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+- `count` la state noi bo cua `Counter`.
+- Moi lan `setCount`, component re-render.
+
 #### B. TypeScript trong React
 - Dinh nghia kieu cho props:
   - `type ButtonProps = { label: string; onClick: () => void }`
@@ -60,6 +113,21 @@
 - Union type:
   - `status: "idle" | "loading" | "success" | "error"`
 
+Vi du nhanh:
+
+```tsx
+type LoginFormProps = {
+  status: "idle" | "loading" | "success" | "error";
+};
+
+function LoginForm({ status }: LoginFormProps) {
+  return <p>Trang thai: {status}</p>;
+}
+```
+
+- Ban chi duoc truyen 1 trong 4 gia tri cho `status`.
+- Neu truyen gia tri khac, TypeScript bao loi ngay.
+
 #### C. React Hooks can hoc ky
 - `useState`: quan ly state local.
 - `useEffect`: side effects (goi API, lang nghe su kien, dong bo du lieu).
@@ -67,6 +135,112 @@
 - `useCallback`: giu tham chieu ham on dinh.
 - `useRef`: truy cap DOM / luu gia tri khong gay re-render.
 - `useContext`: chia se state nhe trong app.
+
+Vi du nhanh `useState`:
+
+```tsx
+"use client";
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+  return <button onClick={() => setCount((v) => v + 1)}>Count: {count}</button>;
+}
+```
+
+Vi du nhanh `useEffect`:
+
+```tsx
+"use client";
+import { useEffect, useState } from "react";
+
+export default function Clock() {
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    const id = setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return <p>{time}</p>;
+}
+```
+
+Vi du nhanh `useRef` (focus input):
+
+```tsx
+"use client";
+import { useRef } from "react";
+
+export default function FocusInput() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <div>
+      <input ref={inputRef} />
+      <button onClick={() => inputRef.current?.focus()}>Focus</button>
+    </div>
+  );
+}
+```
+
+Vi du nhanh `useMemo` (tranh tinh lai khong can thiet):
+
+```tsx
+"use client";
+import { useMemo } from "react";
+
+type Task = { id: number; done: boolean };
+
+export default function DoneCount({ tasks }: { tasks: Task[] }) {
+  const doneCount = useMemo(() => {
+    return tasks.filter((t) => t.done).length;
+  }, [tasks]);
+
+  return <p>Da hoan thanh: {doneCount}</p>;
+}
+```
+
+Vi du nhanh `useCallback` (giu ham on dinh):
+
+```tsx
+"use client";
+import { useCallback, useState } from "react";
+
+type Task = { id: number; title: string };
+
+export default function TodoActions() {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  const removeTask = useCallback((id: number) => {
+    setTasks((prev) => prev.filter((t) => t.id !== id));
+  }, []);
+
+  return <button onClick={() => removeTask(1)}>Xoa task id=1</button>;
+}
+```
+
+Vi du nhanh `useContext` (chia se du lieu toan vung):
+
+```tsx
+"use client";
+import { createContext, useContext } from "react";
+
+const ThemeContext = createContext<"light" | "dark">("light");
+
+function Header() {
+  const theme = useContext(ThemeContext);
+  return <p>Theme hien tai: {theme}</p>;
+}
+
+export default function AppTheme() {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Header />
+    </ThemeContext.Provider>
+  );
+}
+```
 
 ### 2.2 Thuc hanh de xuat
 - Bai 1: Tao form them task (title, description).
@@ -93,6 +267,160 @@
 - Cach toi sua:
   - 
 - Vi du toi tu viet:
+  - 
+
+### 2.6 Lo trinh hoc Giai doan 1 theo tung buoi
+
+#### Buoi 1 - Component, Props, State, Event
+- Muc tieu:
+  - Hieu function component la gi.
+  - Biet truyen props co type.
+  - Biet tao state va cap nhat state.
+- Bai tap:
+  - Tao `TaskItem` nhan props: `title`, `done`.
+  - Tao `TaskForm` gom input + nut them task.
+  - Render danh sach task o component cha.
+- Ghi chu nhanh:
+  - Props la du lieu "di xuong", khong sua truc tiep trong component con.
+  - State la du lieu noi bo, dung ham setter de cap nhat.
+
+#### Buoi 2 - useEffect va vong doi du lieu
+- Muc tieu:
+  - Hieu khi nao can `useEffect`.
+  - Biet dependency array anh huong the nao.
+- Bai tap:
+  - Luu task vao `localStorage` moi khi danh sach thay doi.
+  - Tai lai task tu `localStorage` khi vao trang.
+- Ghi chu nhanh:
+  - `useEffect` khong dung de tinh toan UI don gian.
+  - Luon xem ky dependency de tranh bug.
+
+#### Buoi 3 - useMemo, useCallback, useRef
+- Muc tieu:
+  - Biet toi uu dung luc, khong lam dung.
+  - Biet dung ref de focus input.
+- Bai tap:
+  - Dung `useMemo` tinh so task done.
+  - Dung `useRef` focus input sau khi them task.
+- Ghi chu nhanh:
+  - Chi toi uu khi co van de hieu nang that.
+  - Uu tien code de doc truoc, toi uu sau.
+
+### 2.7 Cach dung Function Component dung cach (rat quan trong)
+
+#### A. Mau dung co ban
+- Dat ten component viet hoa chu cai dau.
+- Props phai co type ro rang.
+- Tra ve JSX ro rang, ngan gon.
+
+```tsx
+type TaskItemProps = {
+  title: string;
+  done: boolean;
+  onToggle: () => void;
+};
+
+export default function TaskItem({ title, done, onToggle }: TaskItemProps) {
+  return (
+    <li>
+      <button onClick={onToggle}>{done ? "Done" : "Todo"}</button>
+      <span>{title}</span>
+    </li>
+  );
+}
+```
+
+Giai thich nhanh:
+- `TaskItem` viet hoa dung quy tac component.
+- Props duoc type ro rang bang `TaskItemProps`.
+- Khong sua truc tiep props, chi goi `onToggle` de component cha xu ly.
+
+#### B. Quy tac quan trong
+- Khong goi hooks ben trong `if`, `for`, `while`.
+- Khong sua props truc tiep.
+- Khong dat qua nhieu logic trong 1 component lon.
+- Tach thanh component nho neu JSX dai, kho doc.
+
+#### C. Khi nao them "use client" trong Next.js App Router
+- Component co su dung hook (`useState`, `useEffect`, ...).
+- Component co event browser (`onClick`, `onChange`, ...).
+- Component dung API chi co tren browser (`window`, `localStorage`).
+
+Vi du:
+
+```tsx
+"use client";
+import { useState } from "react";
+
+export default function SearchBox() {
+  const [q, setQ] = useState("");
+  return <input value={q} onChange={(e) => setQ(e.target.value)} />;
+}
+```
+
+- Vi component co `useState` + `onChange`, bat buoc them `"use client"`.
+
+#### D. Mau sai thuong gap
+
+```tsx
+// Sai: ten component viet thuong + hooks trong if
+function taskItem() {
+  if (true) {
+    const [count, setCount] = useState(0);
+  }
+  return <div>Task</div>;
+}
+```
+
+#### E. Mau dung thay the
+
+```tsx
+"use client";
+import { useState } from "react";
+
+export default function TaskItem() {
+  const [count, setCount] = useState(0);
+
+  return <button onClick={() => setCount((v) => v + 1)}>{count}</button>;
+}
+```
+
+### 2.8 Khu vuc ghi chu buoi hoc (dien truc tiep vao day)
+
+#### Mau ghi chu Buoi 1
+- Toi hieu:
+  - 
+- Toi chua hieu:
+  - 
+- Loi toi da gap:
+  - 
+- Cach toi sua:
+  - 
+- Doan code toi viet tot nhat hom nay:
+  - 
+
+#### Mau ghi chu Buoi 2
+- Toi hieu:
+  - 
+- Toi chua hieu:
+  - 
+- Loi toi da gap:
+  - 
+- Cach toi sua:
+  - 
+- Doan code toi viet tot nhat hom nay:
+  - 
+
+#### Mau ghi chu Buoi 3
+- Toi hieu:
+  - 
+- Toi chua hieu:
+  - 
+- Loi toi da gap:
+  - 
+- Cach toi sua:
+  - 
+- Doan code toi viet tot nhat hom nay:
   - 
 
 ---
