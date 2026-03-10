@@ -1,58 +1,58 @@
-# TAI LIEU HOC NEXT.JS (APP ROUTER + TYPESCRIPT) VA REDUX TOOLKIT
+# TÀI LIỆU HỌC NEXT.JS (APP ROUTER + TYPESCRIPT) VÀ REDUX TOOLKIT
 
-> Muc tieu: Hoc de tu cat giao dien, viet logic, va lam duoc project thuc te voi Next.js + RTK.
-
----
-
-## 0) Cach su dung tai lieu nay
-
-- Moi giai doan co 4 phan:
-  - **Ly thuyet cot loi**
-  - **Thuc hanh**
-  - **Checklist dat duoc**
-  - **Ghi chu ca nhan**
-- Ban hoc theo thu tu tu tren xuong duoi.
-- Hoan thanh checklist moi chuyen sang phan tiep theo.
-- Moi ngay nen hoc 60-120 phut, thuc hanh it nhat 60% thoi gian.
+> Mục tiêu: Học để tự cắt giao diện, viết logic, và làm được project thực tế với Next.js + RTK.
 
 ---
 
-## 1) Tong quan lo trinh
+## 0) Cách sử dụng tài liệu này
 
-### Giai doan 1: Nen tang React + TypeScript + Hooks
-- Hieu component, props, state, event.
-- Nam duoc TypeScript can ban trong React.
-- Su dung thanh thao cac hooks quan trong.
+- Mỗi giai đoạn có 4 phần:
+  - **Lý thuyết cốt lõi**
+  - **Thực hành**
+  - **Checklist đạt được**
+  - **Ghi chú cá nhân**
+- Bạn học theo thứ tự từ trên xuống dưới.
+- Hoàn thành checklist mới chuyển sang phần tiếp theo.
+- Mỗi ngày nên học 60-120 phút, thực hành ít nhất 60% thời gian.
 
-### Giai doan 2: Next.js App Router (TypeScript)
-- Hieu cau truc `app/`, `layout.tsx`, `page.tsx`.
-- Phan biet Server Component va Client Component.
+---
+
+## 1) Tổng quan lộ trình
+
+### Giai đoạn 1: Nền tảng React + TypeScript + Hooks
+- Hiểu component, props, state, event.
+- Nắm được TypeScript căn bản trong React.
+- Sử dụng thành thạo các hooks quan trọng.
+
+### Giai đoạn 2: Next.js App Router (TypeScript)
+- Hiểu cấu trúc `app/`, `layout.tsx`, `page.tsx`.
+- Phân biệt Server Component và Client Component.
 - Routing, dynamic route, loading/error/not-found.
-- Data fetching dung cach trong App Router.
+- Data fetching đúng cách trong App Router.
 
-### Giai doan 3: Redux Toolkit (RTK) trong Next.js
-- Tao store, slice, action, selector.
-- Xu ly API voi `createAsyncThunk`.
-- Tich hop RTK vao Next.js App Router dung client boundary.
+### Giai đoạn 3: Redux Toolkit (RTK) trong Next.js
+- Tạo store, slice, action, selector.
+- Xử lý API với `createAsyncThunk`.
+- Tích hợp RTK vào Next.js App Router đúng client boundary.
 
-### Giai doan 4: Project thuc chien
-- Lam app CRUD (vi du: Quan ly cong viec).
-- Co tim kiem, loc, phan trang, loading, error.
-- To chuc code sach, de bao tri.
+### Giai đoạn 4: Project thực chiến
+- Làm app CRUD (ví dụ: Quản lý công việc).
+- Có tìm kiếm, lọc, phân trang, loading, error.
+- Tổ chức code sạch, dễ bảo trì.
 
 ---
 
-## 2) GIAI DOAN 1 - React + TypeScript + Hooks
+## 2) GIAI ĐOẠN 1 - React + TypeScript + Hooks
 
-### 2.1 Ly thuyet cot loi
+### 2.1 Lý thuyết cốt lõi
 
-#### A. React can ban
-- Component la ham tra ve JSX.
-- Props dung de truyen du lieu tu cha -> con.
-- State dung de luu trang thai ben trong component.
+#### A. React căn bản
+- Component là hàm trả về JSX.
+- Props dùng để truyền dữ liệu từ cha -> con.
+- State dùng để lưu trạng thái bên trong component.
 - Event handling: `onClick`, `onChange`, `onSubmit`.
 
-Vi du nhanh:
+Ví dụ nhanh:
 
 ```tsx
 type HelloProps = { name: string };
@@ -62,10 +62,10 @@ function Hello({ name }: HelloProps) {
 }
 ```
 
-- `Hello` la component.
-- `name` la props truyen vao.
+- `Hello` là component.
+- `name` là props truyền vào.
 
-Vi du rieng cho Props (cha -> con):
+Ví dụ riêng cho Props (cha -> con):
 
 ```tsx
 type UserCardProps = {
@@ -82,10 +82,10 @@ export default function Parent() {
 }
 ```
 
-- `Parent` (cha) truyen du lieu cho `UserCard` (con) qua props.
-- Component con khong duoc sua truc tiep props.
+- `Parent` (cha) truyền dữ liệu cho `UserCard` (con) qua props.
+- Component con không được sửa trực tiếp props.
 
-Vi du rieng cho State (trang thai noi bo):
+Ví dụ riêng cho State (trạng thái nội bộ):
 
 ```tsx
 "use client";
@@ -102,18 +102,18 @@ export default function Counter() {
 }
 ```
 
-- `count` la state noi bo cua `Counter`.
-- Moi lan `setCount`, component re-render.
+- `count` là state nội bộ của `Counter`.
+- Mỗi lần `setCount`, component re-render.
 
 #### B. TypeScript trong React
-- Dinh nghia kieu cho props:
+- Định nghĩa kiểu cho props:
   - `type ButtonProps = { label: string; onClick: () => void }`
 - Typing cho event:
   - `React.ChangeEvent<HTMLInputElement>`
 - Union type:
   - `status: "idle" | "loading" | "success" | "error"`
 
-Vi du nhanh:
+Ví dụ nhanh:
 
 ```tsx
 type LoginFormProps = {
@@ -125,18 +125,18 @@ function LoginForm({ status }: LoginFormProps) {
 }
 ```
 
-- Ban chi duoc truyen 1 trong 4 gia tri cho `status`.
-- Neu truyen gia tri khac, TypeScript bao loi ngay.
+- Bạn chỉ được truyền 1 trong 4 giá trị cho `status`.
+- Nếu truyền giá trị khác, TypeScript báo lỗi ngay.
 
-#### C. React Hooks can hoc ky
-- `useState`: quan ly state local.
-- `useEffect`: side effects (goi API, lang nghe su kien, dong bo du lieu).
-- `useMemo`: cache ket qua tinh toan nang.
-- `useCallback`: giu tham chieu ham on dinh.
-- `useRef`: truy cap DOM / luu gia tri khong gay re-render.
-- `useContext`: chia se state nhe trong app.
+#### C. React Hooks cần học kỹ
+- `useState`: quản lý state local.
+- `useEffect`: side effects (gọi API, lắng nghe sự kiện, đồng bộ dữ liệu).
+- `useMemo`: cache kết quả tính toán nặng.
+- `useCallback`: giữ tham chiếu hàm ổn định.
+- `useRef`: truy cập DOM / lưu giá trị không gây re-render.
+- `useContext`: chia sẻ state nhẹ trong app.
 
-Vi du nhanh `useState`:
+Ví dụ nhanh `useState`:
 
 ```tsx
 "use client";
@@ -148,7 +148,7 @@ export default function Counter() {
 }
 ```
 
-Vi du nhanh `useEffect`:
+Ví dụ nhanh `useEffect`:
 
 ```tsx
 "use client";
@@ -166,7 +166,7 @@ export default function Clock() {
 }
 ```
 
-Vi du nhanh `useRef` (focus input):
+Ví dụ nhanh `useRef` (focus input):
 
 ```tsx
 "use client";
@@ -184,7 +184,7 @@ export default function FocusInput() {
 }
 ```
 
-Vi du nhanh `useMemo` (tranh tinh lai khong can thiet):
+Ví dụ nhanh `useMemo` (tránh tính lại không cần thiết):
 
 ```tsx
 "use client";
@@ -201,7 +201,7 @@ export default function DoneCount({ tasks }: { tasks: Task[] }) {
 }
 ```
 
-Vi du nhanh `useCallback` (giu ham on dinh):
+Ví dụ nhanh `useCallback` (giữ hàm ổn định):
 
 ```tsx
 "use client";
@@ -220,7 +220,7 @@ export default function TodoActions() {
 }
 ```
 
-Vi du nhanh `useContext` (chia se du lieu toan vung):
+Ví dụ nhanh `useContext` (chia sẻ dữ liệu toàn vùng):
 
 ```tsx
 "use client";
@@ -242,76 +242,76 @@ export default function AppTheme() {
 }
 ```
 
-### 2.2 Thuc hanh de xuat
-- Bai 1: Tao form them task (title, description).
-- Bai 2: Viet bo loc task theo keyword va status.
-- Bai 3: Tinh tong so task da hoan thanh (dung `useMemo`).
-- Bai 4: Focus input tu dong khi mo modal (`useRef`).
+### 2.2 Thực hành đề xuất
+- Bài 1: Tạo form thêm task (title, description).
+- Bài 2: Viết bộ lọc task theo keyword và status.
+- Bài 3: Tính tổng số task đã hoàn thành (dùng `useMemo`).
+- Bài 4: Focus input tự động khi mở modal (`useRef`).
 
-### 2.3 Loi thuong gap
-- Quen them dependency vao `useEffect`.
-- Dung `useMemo/useCallback` qua som, khong can thiet.
-- TypeScript bi `any` qua nhieu.
+### 2.3 Lỗi thường gặp
+- Quên thêm dependency vào `useEffect`.
+- Dùng `useMemo/useCallback` quá sớm, không cần thiết.
+- TypeScript bị `any` quá nhiều.
 
-### 2.4 Checklist dat duoc
-- [ ] Viet component co props typed day du.
-- [ ] Dung `useState` va `useEffect` dung tinh huong.
-- [ ] Hieu khi nao dung `useMemo`, `useCallback`, `useRef`.
-- [ ] Khong dung `any` tuy tien.
+### 2.4 Checklist đạt được
+- [ ] Viết component có props typed đầy đủ.
+- [ ] Dùng `useState` và `useEffect` đúng tình huống.
+- [ ] Hiểu khi nào dùng `useMemo`, `useCallback`, `useRef`.
+- [ ] Không dùng `any` tuỳ tiện.
 
-### 2.5 Ghi chu ca nhan (tu dien)
-- Kien thuc de nho:
+### 2.5 Ghi chú cá nhân (tự điền)
+- Kiến thức dễ nhớ:
   - 
-- Van de gap phai:
+- Vấn đề gặp phải:
   - 
-- Cach toi sua:
+- Cách tôi sửa:
   - 
-- Vi du toi tu viet:
+- Ví dụ tôi tự viết:
   - 
 
-### 2.6 Lo trinh hoc Giai doan 1 theo tung buoi
+### 2.6 Lộ trình học Giai đoạn 1 theo từng buổi
 
-#### Buoi 1 - Component, Props, State, Event
-- Muc tieu:
-  - Hieu function component la gi.
-  - Biet truyen props co type.
-  - Biet tao state va cap nhat state.
-- Bai tap:
-  - Tao `TaskItem` nhan props: `title`, `done`.
-  - Tao `TaskForm` gom input + nut them task.
-  - Render danh sach task o component cha.
-- Ghi chu nhanh:
-  - Props la du lieu "di xuong", khong sua truc tiep trong component con.
-  - State la du lieu noi bo, dung ham setter de cap nhat.
+#### Buổi 1 - Component, Props, State, Event
+- Mục tiêu:
+  - Hiểu function component là gì.
+  - Biết truyền props có type.
+  - Biết tạo state và cập nhật state.
+- Bài tập:
+  - Tạo `TaskItem` nhận props: `title`, `done`.
+  - Tạo `TaskForm` gồm input + nút thêm task.
+  - Render danh sách task ở component cha.
+- Ghi chú nhanh:
+  - Props là dữ liệu "đi xuống", không sửa trực tiếp trong component con.
+  - State là dữ liệu nội bộ, dùng hàm setter để cập nhật.
 
-#### Buoi 2 - useEffect va vong doi du lieu
-- Muc tieu:
-  - Hieu khi nao can `useEffect`.
-  - Biet dependency array anh huong the nao.
-- Bai tap:
-  - Luu task vao `localStorage` moi khi danh sach thay doi.
-  - Tai lai task tu `localStorage` khi vao trang.
-- Ghi chu nhanh:
-  - `useEffect` khong dung de tinh toan UI don gian.
-  - Luon xem ky dependency de tranh bug.
+#### Buổi 2 - useEffect và vòng đời dữ liệu
+- Mục tiêu:
+  - Hiểu khi nào cần `useEffect`.
+  - Biết dependency array ảnh hưởng thế nào.
+- Bài tập:
+  - Lưu task vào `localStorage` mỗi khi danh sách thay đổi.
+  - Tải lại task từ `localStorage` khi vào trang.
+- Ghi chú nhanh:
+  - `useEffect` không dùng để tính toán UI đơn giản.
+  - Luôn xem kỹ dependency để tránh bug.
 
-#### Buoi 3 - useMemo, useCallback, useRef
-- Muc tieu:
-  - Biet toi uu dung luc, khong lam dung.
-  - Biet dung ref de focus input.
-- Bai tap:
-  - Dung `useMemo` tinh so task done.
-  - Dung `useRef` focus input sau khi them task.
-- Ghi chu nhanh:
-  - Chi toi uu khi co van de hieu nang that.
-  - Uu tien code de doc truoc, toi uu sau.
+#### Buổi 3 - useMemo, useCallback, useRef
+- Mục tiêu:
+  - Biết tối ưu đúng lúc, không lạm dụng.
+  - Biết dùng ref để focus input.
+- Bài tập:
+  - Dùng `useMemo` tính số task done.
+  - Dùng `useRef` focus input sau khi thêm task.
+- Ghi chú nhanh:
+  - Chỉ tối ưu khi có vấn đề hiệu năng thật.
+  - Ưu tiên code dễ đọc trước, tối ưu sau.
 
-### 2.7 Cach dung Function Component dung cach (rat quan trong)
+### 2.7 Cách dùng Function Component đúng cách (rất quan trọng)
 
-#### A. Mau dung co ban
-- Dat ten component viet hoa chu cai dau.
-- Props phai co type ro rang.
-- Tra ve JSX ro rang, ngan gon.
+#### A. Mẫu đúng cơ bản
+- Đặt tên component viết hoa chữ cái đầu.
+- Props phải có type rõ ràng.
+- Trả về JSX rõ ràng, ngắn gọn.
 
 ```tsx
 type TaskItemProps = {
@@ -330,23 +330,23 @@ export default function TaskItem({ title, done, onToggle }: TaskItemProps) {
 }
 ```
 
-Giai thich nhanh:
-- `TaskItem` viet hoa dung quy tac component.
-- Props duoc type ro rang bang `TaskItemProps`.
-- Khong sua truc tiep props, chi goi `onToggle` de component cha xu ly.
+Giải thích nhanh:
+- `TaskItem` viết hoa đúng quy tắc component.
+- Props được type rõ ràng bằng `TaskItemProps`.
+- Không sửa trực tiếp props, chỉ gọi `onToggle` để component cha xử lý.
 
-#### B. Quy tac quan trong
-- Khong goi hooks ben trong `if`, `for`, `while`.
-- Khong sua props truc tiep.
-- Khong dat qua nhieu logic trong 1 component lon.
-- Tach thanh component nho neu JSX dai, kho doc.
+#### B. Quy tắc quan trọng
+- Không gọi hooks bên trong `if`, `for`, `while`.
+- Không sửa props trực tiếp.
+- Không đặt quá nhiều logic trong 1 component lớn.
+- Tách thành component nhỏ nếu JSX dài, khó đọc.
 
-#### C. Khi nao them "use client" trong Next.js App Router
-- Component co su dung hook (`useState`, `useEffect`, ...).
-- Component co event browser (`onClick`, `onChange`, ...).
-- Component dung API chi co tren browser (`window`, `localStorage`).
+#### C. Khi nào thêm "use client" trong Next.js App Router
+- Component có sử dụng hook (`useState`, `useEffect`, ...).
+- Component có event browser (`onClick`, `onChange`, ...).
+- Component dùng API chỉ có trên browser (`window`, `localStorage`).
 
-Vi du:
+Ví dụ:
 
 ```tsx
 "use client";
@@ -358,9 +358,9 @@ export default function SearchBox() {
 }
 ```
 
-- Vi component co `useState` + `onChange`, bat buoc them `"use client"`.
+- Vì component có `useState` + `onChange`, bắt buộc thêm `"use client"`.
 
-#### D. Mau sai thuong gap
+#### D. Mẫu sai thường gặp
 
 ```tsx
 // Sai: ten component viet thuong + hooks trong if
@@ -372,7 +372,7 @@ function taskItem() {
 }
 ```
 
-#### E. Mau dung thay the
+#### E. Mẫu đúng thay thế
 
 ```tsx
 "use client";
@@ -385,60 +385,60 @@ export default function TaskItem() {
 }
 ```
 
-### 2.8 Khu vuc ghi chu buoi hoc (dien truc tiep vao day)
+### 2.8 Khu vực ghi chú buổi học (điền trực tiếp vào đây)
 
-#### Mau ghi chu Buoi 1
-- Toi hieu:
+#### Mẫu ghi chú Buổi 1
+- Tôi hiểu:
   - 
-- Toi chua hieu:
+- Tôi chưa hiểu:
   - 
-- Loi toi da gap:
+- Lỗi tôi đã gặp:
   - 
-- Cach toi sua:
+- Cách tôi sửa:
   - 
-- Doan code toi viet tot nhat hom nay:
-  - 
-
-#### Mau ghi chu Buoi 2
-- Toi hieu:
-  - 
-- Toi chua hieu:
-  - 
-- Loi toi da gap:
-  - 
-- Cach toi sua:
-  - 
-- Doan code toi viet tot nhat hom nay:
+- Đoạn code tôi viết tốt nhất hôm nay:
   - 
 
-#### Mau ghi chu Buoi 3
-- Toi hieu:
+#### Mẫu ghi chú Buổi 2
+- Tôi hiểu:
   - 
-- Toi chua hieu:
+- Tôi chưa hiểu:
   - 
-- Loi toi da gap:
+- Lỗi tôi đã gặp:
   - 
-- Cach toi sua:
+- Cách tôi sửa:
   - 
-- Doan code toi viet tot nhat hom nay:
+- Đoạn code tôi viết tốt nhất hôm nay:
+  - 
+
+#### Mẫu ghi chú Buổi 3
+- Tôi hiểu:
+  - 
+- Tôi chưa hiểu:
+  - 
+- Lỗi tôi đã gặp:
+  - 
+- Cách tôi sửa:
+  - 
+- Đoạn code tôi viết tốt nhất hôm nay:
   - 
 
 ---
 
-## 3) GIAI DOAN 2 - Next.js App Router + TypeScript
+## 3) GIAI ĐOẠN 2 - Next.js App Router + TypeScript
 
-### 3.1 Ly thuyet cot loi
+### 3.1 Lý thuyết cốt lõi
 
-#### A. Cau truc thu muc App Router
-- `app/layout.tsx`: layout goc.
+#### A. Cấu trúc thư mục App Router
+- `app/layout.tsx`: layout gốc.
 - `app/page.tsx`: trang home.
 - `app/about/page.tsx`: route `/about`.
 - `app/products/[id]/page.tsx`: dynamic route.
 - `app/loading.tsx`: UI loading.
-- `app/error.tsx`: UI khi co loi runtime.
-- `app/not-found.tsx`: UI khi khong tim thay trang.
+- `app/error.tsx`: UI khi có lỗi runtime.
+- `app/not-found.tsx`: UI khi không tìm thấy trang.
 
-Vi du cau truc:
+Ví dụ cấu trúc:
 
 ```txt
 app/
@@ -453,13 +453,13 @@ app/
 ```
 
 #### B. Server Component vs Client Component
-- Mac dinh trong `app/` la **Server Component**.
-- Neu can hooks/event browser -> them `"use client"` o dau file.
-- Quy tac:
-  - UI co click/typing state local: Client Component.
-  - Lay data server va render lan dau: uu tien Server Component.
+- Mặc định trong `app/` là **Server Component**.
+- Nếu cần hooks/event browser -> thêm `"use client"` ở đầu file.
+- Quy tắc:
+  - UI có click/typing state local: Client Component.
+  - Lấy data server và render lần đầu: ưu tiên Server Component.
 
-Vi du Server Component:
+Ví dụ Server Component:
 
 ```tsx
 // app/products/page.tsx
@@ -474,7 +474,7 @@ export default async function ProductsPage() {
 }
 ```
 
-Vi du Client Component:
+Ví dụ Client Component:
 
 ```tsx
 "use client";
@@ -488,11 +488,11 @@ export default function CounterClient() {
 
 #### C. Navigation hooks trong Next.js
 - `useRouter()`: push/replace/back.
-- `usePathname()`: lay current path.
-- `useSearchParams()`: doc query string.
-- `useParams()`: lay dynamic params.
+- `usePathname()`: lấy current path.
+- `useSearchParams()`: đọc query string.
+- `useParams()`: lấy dynamic params.
 
-Vi du:
+Ví dụ:
 
 ```tsx
 "use client";
@@ -516,13 +516,13 @@ export default function NavExample() {
 ```
 
 #### D. Data Fetching trong App Router
-- Goi API trong Server Component voi `fetch`.
+- Gọi API trong Server Component với `fetch`.
 - Caching:
-  - mac dinh co cache (tuy theo request)
-  - `cache: "no-store"` cho du lieu luon moi
-  - `next: { revalidate: 60 }` de ISR moi 60s
+  - mặc định có cache (tuỳ theo request)
+  - `cache: "no-store"` cho dữ liệu luôn mới
+  - `next: { revalidate: 60 }` để ISR mỗi 60s
 
-Vi du `no-store`:
+Ví dụ `no-store`:
 
 ```tsx
 const res = await fetch("https://dummyjson.com/products", {
@@ -530,7 +530,7 @@ const res = await fetch("https://dummyjson.com/products", {
 });
 ```
 
-Vi du `revalidate`:
+Ví dụ `revalidate`:
 
 ```tsx
 const res = await fetch("https://dummyjson.com/products", {
@@ -538,60 +538,60 @@ const res = await fetch("https://dummyjson.com/products", {
 });
 ```
 
-### 3.2 Thuc hanh de xuat
-- Bai 1: Tao 3 trang: Home, Products, Product Detail.
-- Bai 2: Tao dynamic route `/products/[id]`.
-- Bai 3: Tao `loading.tsx` va `error.tsx` cho route products.
-- Bai 4: Viet bo loc theo query string (`?q=...`) bang `useSearchParams`.
+### 3.2 Thực hành đề xuất
+- Bài 1: Tạo 3 trang: Home, Products, Product Detail.
+- Bài 2: Tạo dynamic route `/products/[id]`.
+- Bài 3: Tạo `loading.tsx` và `error.tsx` cho route products.
+- Bài 4: Viết bộ lọc theo query string (`?q=...`) bằng `useSearchParams`.
 
-### 3.3 Loi thuong gap
-- Dung hook React trong Server Component (gay loi).
-- Quen `"use client"` o component can interactive.
-- Khong hieu cache, dan den du lieu "khong update".
+### 3.3 Lỗi thường gặp
+- Dùng hook React trong Server Component (gây lỗi).
+- Quên `"use client"` ở component cần interactive.
+- Không hiểu cache, dẫn đến dữ liệu "không update".
 
-### 3.4 Checklist dat duoc
-- [ ] Tu tao duoc route tinh va route dong.
-- [ ] Hieu va ap dung dung Server/Client Component.
-- [ ] Viet data fetching dung cach trong App Router.
-- [ ] Xu ly loading/error/not-found ro rang.
+### 3.4 Checklist đạt được
+- [ ] Tự tạo được route tĩnh và route động.
+- [ ] Hiểu và áp dụng đúng Server/Client Component.
+- [ ] Viết data fetching đúng cách trong App Router.
+- [ ] Xử lý loading/error/not-found rõ ràng.
 
-### 3.5 Ghi chu ca nhan (tu dien)
-- Kien thuc de nho:
+### 3.5 Ghi chú cá nhân (tự điền)
+- Kiến thức dễ nhớ:
   - 
-- Van de gap phai:
+- Vấn đề gặp phải:
   - 
-- Cach toi sua:
+- Cách tôi sửa:
   - 
-- Vi du toi tu viet:
+- Ví dụ tôi tự viết:
   - 
 
-### 3.6 Lo trinh hoc Giai doan 2 theo tung buoi
+### 3.6 Lộ trình học Giai đoạn 2 theo từng buổi
 
-#### Buoi 1 - Routing va layout
-- Muc tieu:
-  - Tao route tinh + route dong.
-  - Hieu quan he giua `layout.tsx` va `page.tsx`.
-- Bai tap:
-  - Tao `/about`, `/products`, `/products/[id]`.
-  - Tao layout chung co header + main.
+#### Buổi 1 - Routing và layout
+- Mục tiêu:
+  - Tạo route tĩnh + route động.
+  - Hiểu quan hệ giữa `layout.tsx` và `page.tsx`.
+- Bài tập:
+  - Tạo `/about`, `/products`, `/products/[id]`.
+  - Tạo layout chung có header + main.
 
-#### Buoi 2 - Server/Client Component + hooks Next
-- Muc tieu:
-  - Phan biet ro component nao la server/client.
-  - Dung duoc `useRouter`, `usePathname`, `useSearchParams`, `useParams`.
-- Bai tap:
-  - Tao o tim kiem query `?q=...`.
-  - Tao nut chuyen trang bang `router.push`.
+#### Buổi 2 - Server/Client Component + hooks Next
+- Mục tiêu:
+  - Phân biệt rõ component nào là server/client.
+  - Dùng được `useRouter`, `usePathname`, `useSearchParams`, `useParams`.
+- Bài tập:
+  - Tạo ô tìm kiếm query `?q=...`.
+  - Tạo nút chuyển trang bằng `router.push`.
 
-#### Buoi 3 - Data fetching + loading/error
-- Muc tieu:
-  - Goi API dung trong App Router.
-  - Hieu cache va revalidate co ban.
-- Bai tap:
-  - Tao `loading.tsx` cho route products.
-  - Tao `error.tsx` de xu ly loi runtime.
+#### Buổi 3 - Data fetching + loading/error
+- Mục tiêu:
+  - Gọi API đúng trong App Router.
+  - Hiểu cache và revalidate cơ bản.
+- Bài tập:
+  - Tạo `loading.tsx` cho route products.
+  - Tạo `error.tsx` để xử lý lỗi runtime.
 
-### 3.7 Mau file quan trong trong App Router
+### 3.7 Mẫu file quan trọng trong App Router
 
 #### `app/products/loading.tsx`
 
@@ -622,25 +622,25 @@ export default function Error({
 }
 ```
 
-### 3.8 Bai giang chi tiet Giai doan 2 (hoc de tu lam duoc)
+### 3.8 Bài giảng chi tiết Giai đoạn 2 (học để tự làm được)
 
-#### Muc tieu sau khi hoc xong Giai doan 2
-- Ban tu tao duoc project Next.js App Router co cau truc ro rang.
-- Ban biet route nao dung Server Component, route nao dung Client Component.
-- Ban fetch du lieu dung cach, hieu cache co ban.
-- Ban xu ly duoc loading, error, not-found trong thuc te.
-- Ban biet doc query, params va dieu huong trang bang hooks Next.
+#### Mục tiêu sau khi học xong Giai đoạn 2
+- Bạn tự tạo được project Next.js App Router có cấu trúc rõ ràng.
+- Bạn biết route nào dùng Server Component, route nào dùng Client Component.
+- Bạn fetch dữ liệu đúng cách, hiểu cache cơ bản.
+- Bạn xử lý được loading, error, not-found trong thực tế.
+- Bạn biết đọc query, params và điều hướng trang bằng hooks Next.
 
 ---
 
-#### Phan 1 - Tu duy App Router (goc re)
+#### Phần 1 - Tư duy App Router (gốc rễ)
 
-- App Router la cach to chuc route dua tren thu muc trong `app/`.
-- Moi folder co `page.tsx` se tao ra 1 URL.
-- `layout.tsx` la bo khung dung chung cho nhieu trang con.
-- Component trong `app/` mac dinh la Server Component (render phia server).
+- App Router là cách tổ chức route dựa trên thư mục trong `app/`.
+- Mỗi folder có `page.tsx` sẽ tạo ra 1 URL.
+- `layout.tsx` là bộ khung dùng chung cho nhiều trang con.
+- Component trong `app/` mặc định là Server Component (render phía server).
 
-Vi du:
+Ví dụ:
 
 ```txt
 app/
@@ -652,18 +652,18 @@ app/
       page.tsx    -> /blog/:slug
 ```
 
-Tu duy nhanh:
-- `page.tsx` = noi dung trang.
-- `layout.tsx` = khung bao ngoai.
-- `loading.tsx` = cho route dang tai.
-- `error.tsx` = khi route bi loi.
-- `not-found.tsx` = khi khong co du lieu / route sai.
+Tư duy nhanh:
+- `page.tsx` = nội dung trang.
+- `layout.tsx` = khung bao ngoài.
+- `loading.tsx` = cho route đang tải.
+- `error.tsx` = khi route bị lỗi.
+- `not-found.tsx` = khi không có dữ liệu / route sai.
 
 ---
 
-#### Phan 2 - Layout trong App Router (cuc ky quan trong)
+#### Phần 2 - Layout trong App Router (cực kỳ quan trọng)
 
-`layout.tsx` goc:
+`layout.tsx` gốc:
 
 ```tsx
 // app/layout.tsx
@@ -683,12 +683,12 @@ export default function RootLayout({
 }
 ```
 
-Giai thich:
-- `children` la noi dung cua route con.
-- Header o layout goc se xuat hien tren moi trang.
-- Ban co the tao layout rieng cho tung nhom route.
+Giải thích:
+- `children` là nội dung của route con.
+- Header ở layout gốc sẽ xuất hiện trên mọi trang.
+- Bạn có thể tạo layout riêng cho từng nhóm route.
 
-Vi du layout rieng cho products:
+Ví dụ layout riêng cho products:
 
 ```tsx
 // app/products/layout.tsx
@@ -708,12 +708,12 @@ export default function ProductsLayout({
 
 ---
 
-#### Phan 3 - Server Component vs Client Component (de tranh loi)
+#### Phần 3 - Server Component vs Client Component (để tránh lỗi)
 
-##### Server Component (mac dinh)
-- Dung de lay data va render ban dau.
-- Khong dung duoc `useState`, `useEffect`, event click.
-- Co the goi `fetch` truc tiep.
+##### Server Component (mặc định)
+- Dùng để lấy data và render ban đầu.
+- Không dùng được `useState`, `useEffect`, event click.
+- Có thể gọi `fetch` trực tiếp.
 
 ```tsx
 // app/products/page.tsx
@@ -736,8 +736,8 @@ export default async function ProductsPage() {
 ```
 
 ##### Client Component
-- Dung khi can state, hooks, event browser.
-- Them `"use client"` o dong dau file.
+- Dùng khi cần state, hooks, event browser.
+- Thêm `"use client"` ở dòng đầu file.
 
 ```tsx
 "use client";
@@ -755,14 +755,14 @@ export default function QuantityPicker() {
 }
 ```
 
-Quy tac vang:
-- Lay data: uu tien Server Component.
-- Tuong tac UI: Client Component.
-- Khong nhat thiet bien tat ca thanh Client.
+Quy tắc vàng:
+- Lấy data: ưu tiên Server Component.
+- Tương tác UI: Client Component.
+- Không nhất thiết biến tất cả thành Client.
 
 ---
 
-#### Phan 4 - Dynamic Route va Params
+#### Phần 4 - Dynamic Route và Params
 
 Folder:
 
@@ -792,17 +792,17 @@ export default async function ProductDetail({
 }
 ```
 
-Giai thich:
-- `[id]` la dynamic segment.
-- `params.id` chinh la gia tri URL.
+Giải thích:
+- `[id]` là dynamic segment.
+- `params.id` chính là giá trị URL.
 
 ---
 
-#### Phan 5 - Query String va Search Params
+#### Phần 5 - Query String và Search Params
 
-Vi du URL: `/products?q=iphone&sort=price_asc`
+Ví dụ URL: `/products?q=iphone&sort=price_asc`
 
-Doc query trong Client Component:
+Đọc query trong Client Component:
 
 ```tsx
 "use client";
@@ -821,7 +821,7 @@ export default function SearchInfo() {
 }
 ```
 
-Dieu huong co query:
+Điều hướng có query:
 
 ```tsx
 "use client";
@@ -839,9 +839,9 @@ export default function SearchButton() {
 
 ---
 
-#### Phan 6 - Data Fetching + Cache trong App Router
+#### Phần 6 - Data Fetching + Cache trong App Router
 
-##### Cach 1: du lieu luon moi
+##### Cách 1: dữ liệu luôn mới
 
 ```tsx
 const res = await fetch("https://dummyjson.com/products", {
@@ -849,11 +849,11 @@ const res = await fetch("https://dummyjson.com/products", {
 });
 ```
 
-Dung khi:
-- Du lieu thay doi lien tuc.
-- Can dam bao moi request lay du lieu moi nhat.
+Dùng khi:
+- Dữ liệu thay đổi liên tục.
+- Cần đảm bảo mỗi request lấy dữ liệu mới nhất.
 
-##### Cach 2: revalidate theo chu ky
+##### Cách 2: revalidate theo chu kỳ
 
 ```tsx
 const res = await fetch("https://dummyjson.com/products", {
@@ -861,20 +861,20 @@ const res = await fetch("https://dummyjson.com/products", {
 });
 ```
 
-Dung khi:
-- Muon can bang giua toc do va do moi cua du lieu.
-- Chap nhan du lieu cu toi da 60 giay.
+Dùng khi:
+- Muốn cân bằng giữa tốc độ và độ mới của dữ liệu.
+- Chấp nhận dữ liệu cũ tối đa 60 giây.
 
-Quy tac de nho:
-- Chua chac -> bat dau voi `no-store`.
-- Can toi uu -> doi sang `revalidate`.
+Quy tắc dễ nhớ:
+- Chưa chắc -> bắt đầu với `no-store`.
+- Cần tối ưu -> đổi sang `revalidate`.
 
 ---
 
-#### Phan 7 - loading, error, not-found
+#### Phần 7 - loading, error, not-found
 
 ##### `loading.tsx`
-- Tu dong hien thi khi route dang cho data.
+- Tự động hiển thị khi route đang chờ data.
 
 ```tsx
 // app/products/loading.tsx
@@ -884,8 +884,8 @@ export default function Loading() {
 ```
 
 ##### `error.tsx`
-- Bat loi runtime trong route segment.
-- Bat buoc la Client Component.
+- Bắt lỗi runtime trong route segment.
+- Bắt buộc là Client Component.
 
 ```tsx
 "use client";
@@ -915,7 +915,7 @@ export default function NotFound() {
 }
 ```
 
-Va trong `page.tsx` co the goi:
+Và trong `page.tsx` có thể gọi:
 
 ```tsx
 import { notFound } from "next/navigation";
@@ -925,9 +925,9 @@ if (!product) notFound();
 
 ---
 
-#### Phan 8 - Route Groups (to chuc du an de dep)
+#### Phần 8 - Route Groups (tổ chức dự án dễ đẹp)
 
-Vi du:
+Ví dụ:
 
 ```txt
 app/
@@ -938,169 +938,169 @@ app/
     products/page.tsx
 ```
 
-Giai thich:
-- Ten trong ngoac `()` khong xuat hien tren URL.
-- Chi de chia nhom route cho de quan ly.
+Giải thích:
+- Tên trong ngoặc `()` không xuất hiện trên URL.
+- Chỉ để chia nhóm route cho dễ quản lý.
 
 ---
 
-#### Phan 9 - Checklist kiem tra nang luc Giai doan 2
+#### Phần 9 - Checklist kiểm tra năng lực Giai đoạn 2
 
-- [ ] Tao duoc layout goc va layout rieng theo module.
-- [ ] Tao route tinh (`/about`) va route dong (`/products/[id]`).
-- [ ] Hieu ro Server vs Client Component, khong dat sai.
-- [ ] Dung duoc `useRouter`, `useSearchParams`, `useParams`.
-- [ ] Viet `loading.tsx`, `error.tsx`, `not-found.tsx`.
-- [ ] Fetch du lieu va chon cache strategy phu hop.
-
----
-
-#### Phan 10 - Bai tap thuc chien (lam xong se len tay rat nhanh)
-
-De bai: Tao mini module "Products"
-
-Yeu cau:
-- Trang danh sach `/products`: fetch 20 san pham.
-- O tim kiem client side (`q` tren URL).
-- Trang chi tiet `/products/[id]`.
-- Co `loading.tsx` va `error.tsx` cho module products.
-- Neu id khong hop le thi hien `not-found`.
-
-Huong dan lam:
-1. Tao cau truc route va layout.
-2. Lam danh sach truoc.
-3. Lam detail sau.
-4. Them loading/error/not-found.
-5. Them query search.
-
-Tieu chi dat:
-- Code chay dung.
-- Folder ro rang.
-- TypeScript khong `any`.
-- Khong dung hook trong Server Component.
+- [ ] Tạo được layout gốc và layout riêng theo module.
+- [ ] Tạo route tĩnh (`/about`) và route động (`/products/[id]`).
+- [ ] Hiểu rõ Server vs Client Component, không đặt sai.
+- [ ] Dùng được `useRouter`, `useSearchParams`, `useParams`.
+- [ ] Viết `loading.tsx`, `error.tsx`, `not-found.tsx`.
+- [ ] Fetch dữ liệu và chọn cache strategy phù hợp.
 
 ---
 
-#### Phan 11 - Loi thuong gap va cach sua nhanh
+#### Phần 10 - Bài tập thực chiến (làm xong sẽ lên tay rất nhanh)
 
-- Loi: "You're importing a component that needs useState..."
-  - Nguyen nhan: quen `"use client"`.
-  - Cach sua: them `"use client"` vao dau file component can hook/event.
+Đề bài: Tạo mini module "Products"
 
-- Loi: Du lieu cu, khong thay doi sau khi refresh
-  - Nguyen nhan: dinh cache mac dinh.
-  - Cach sua: dung `cache: "no-store"` hoac `revalidate`.
+Yêu cầu:
+- Trang danh sách `/products`: fetch 20 sản phẩm.
+- Ô tìm kiếm client side (`q` trên URL).
+- Trang chi tiết `/products/[id]`.
+- Có `loading.tsx` và `error.tsx` cho module products.
+- Nếu id không hợp lệ thì hiện `not-found`.
 
-- Loi: `params` undefined
-  - Nguyen nhan: sai ten folder dynamic.
-  - Cach sua: dam bao folder la `[id]` va truy cap qua `params.id`.
+Hướng dẫn làm:
+1. Tạo cấu trúc route và layout.
+2. Làm danh sách trước.
+3. Làm detail sau.
+4. Thêm loading/error/not-found.
+5. Thêm query search.
 
-- Loi: `error.tsx` khong chay dung
-  - Nguyen nhan: chua dat `"use client"`.
-  - Cach sua: them `"use client"` cho `error.tsx`.
-
----
-
-#### Phan 12 - Mau ghi chu hoc Giai doan 2 (ban dien vao)
-
-- Hom nay toi hoc:
-  - 
-- Dieu toi hieu ro:
-  - 
-- Dieu toi chua ro:
-  - 
-- Loi toi da gap:
-  - 
-- Cach toi fix:
-  - 
-- 1 dieu toi se ap dung vao project that:
-  - 
+Tiêu chí đạt:
+- Code chạy đúng.
+- Folder rõ ràng.
+- TypeScript không `any`.
+- Không dùng hook trong Server Component.
 
 ---
 
-## 4) GIAI DOAN 3 - Redux Toolkit (RTK) trong Next.js
+#### Phần 11 - Lỗi thường gặp và cách sửa nhanh
 
-### 4.1 Ly thuyet cot loi
+- Lỗi: "You're importing a component that needs useState..."
+  - Nguyên nhân: quên `"use client"`.
+  - Cách sửa: thêm `"use client"` vào đầu file component cần hook/event.
 
-#### A. Cac khai niem RTK
-- `configureStore`: tao store.
-- `createSlice`: tao reducer + action.
-- `useSelector`: doc state.
-- `useDispatch`: goi action.
-- `createAsyncThunk`: xu ly bat dong bo (goi API).
+- Lỗi: Dữ liệu cũ, không thay đổi sau khi refresh
+  - Nguyên nhân: dính cache mặc định.
+  - Cách sửa: dùng `cache: "no-store"` hoặc `revalidate`.
 
-#### B. Cau truc folder goi y
+- Lỗi: `params` undefined
+  - Nguyên nhân: sai tên folder dynamic.
+  - Cách sửa: đảm bảo folder là `[id]` và truy cập qua `params.id`.
+
+- Lỗi: `error.tsx` không chạy đúng
+  - Nguyên nhân: chưa đặt `"use client"`.
+  - Cách sửa: thêm `"use client"` cho `error.tsx`.
+
+---
+
+#### Phần 12 - Mẫu ghi chú học Giai đoạn 2 (bạn điền vào)
+
+- Hôm nay tôi học:
+  - 
+- Điều tôi hiểu rõ:
+  - 
+- Điều tôi chưa rõ:
+  - 
+- Lỗi tôi đã gặp:
+  - 
+- Cách tôi fix:
+  - 
+- 1 điều tôi sẽ áp dụng vào project thật:
+  - 
+
+---
+
+## 4) GIAI ĐOẠN 3 - Redux Toolkit (RTK) trong Next.js
+
+### 4.1 Lý thuyết cốt lõi
+
+#### A. Các khái niệm RTK
+- `configureStore`: tạo store.
+- `createSlice`: tạo reducer + action.
+- `useSelector`: đọc state.
+- `useDispatch`: gọi action.
+- `createAsyncThunk`: xử lý bất đồng bộ (gọi API).
+
+#### B. Cấu trúc folder gợi ý
 - `src/store/store.ts`
 - `src/store/hooks.ts`
 - `src/store/features/todo/todoSlice.ts`
 - `src/providers/StoreProvider.tsx`
 
-#### C. Tich hop voi Next.js App Router
-- Dat `StoreProvider` trong `app/layout.tsx` (thong qua client component trung gian).
-- Thanh phan dung `useSelector/useDispatch` phai la Client Component.
+#### C. Tích hợp với Next.js App Router
+- Đặt `StoreProvider` trong `app/layout.tsx` (thông qua client component trung gian).
+- Thành phần dùng `useSelector/useDispatch` phải là Client Component.
 
-#### D. Khi nao dung RTK?
-- Dung RTK khi:
-  - State dung chung nhieu man hinh.
-  - Logic cap nhat state phuc tap.
-  - Can theo doi loading/error/global state.
-- Khong can RTK khi:
-  - State nho, chi trong 1-2 component.
-  - Du lieu co the lay truc tiep o Server Component.
+#### D. Khi nào dùng RTK?
+- Dùng RTK khi:
+  - State dùng chung nhiều màn hình.
+  - Logic cập nhật state phức tạp.
+  - Cần theo dõi loading/error/global state.
+- Không cần RTK khi:
+  - State nhỏ, chỉ trong 1-2 component.
+  - Dữ liệu có thể lấy trực tiếp ở Server Component.
 
-### 4.2 Thuc hanh de xuat
-- Bai 1: Tao `todoSlice` (add/remove/toggle).
-- Bai 2: Viet `createAsyncThunk` de fetch todo list.
-- Bai 3: Hien thi loading, error, data tren giao dien.
-- Bai 4: Tach selector va custom typed hooks.
+### 4.2 Thực hành đề xuất
+- Bài 1: Tạo `todoSlice` (add/remove/toggle).
+- Bài 2: Viết `createAsyncThunk` để fetch todo list.
+- Bài 3: Hiển thị loading, error, data trên giao diện.
+- Bài 4: Tách selector và custom typed hooks.
 
-### 4.3 Loi thuong gap
-- Dat reducer sai key trong store.
-- Quen typed hooks (`useAppDispatch`, `useAppSelector`).
-- Dispatch thunk nhung khong xu ly state loading/error.
+### 4.3 Lỗi thường gặp
+- Đặt reducer sai key trong store.
+- Quên typed hooks (`useAppDispatch`, `useAppSelector`).
+- Dispatch thunk nhưng không xử lý state loading/error.
 
-### 4.4 Checklist dat duoc
-- [ ] Tao store + slice dung TypeScript.
-- [ ] Viet va dung `createAsyncThunk`.
-- [ ] Hieu luong du lieu: UI -> action -> reducer -> UI.
-- [ ] Tich hop RTK vao Next App Router dung cach.
+### 4.4 Checklist đạt được
+- [ ] Tạo store + slice đúng TypeScript.
+- [ ] Viết và dùng `createAsyncThunk`.
+- [ ] Hiểu luồng dữ liệu: UI -> action -> reducer -> UI.
+- [ ] Tích hợp RTK vào Next App Router đúng cách.
 
-### 4.5 Ghi chu ca nhan (tu dien)
-- Kien thuc de nho:
+### 4.5 Ghi chú cá nhân (tự điền)
+- Kiến thức dễ nhớ:
   - 
-- Van de gap phai:
+- Vấn đề gặp phải:
   - 
-- Cach toi sua:
+- Cách tôi sửa:
   - 
-- Vi du toi tu viet:
+- Ví dụ tôi tự viết:
   - 
 
-### 4.6 Bai giang chi tiet Giai doan 3 (RTK trong Next.js App Router)
+### 4.6 Bài giảng chi tiết Giai đoạn 3 (RTK trong Next.js App Router)
 
-#### Muc tieu sau khi hoc xong Giai doan 3
-- Ban tu tao duoc store voi `configureStore`.
-- Ban viet duoc slice co action + reducer ro rang.
-- Ban viet duoc `createAsyncThunk` de goi API.
-- Ban ket noi RTK vao Next.js App Router dung vi tri.
-- Ban hieu khi nao dung RTK, khi nao khong can.
+#### Mục tiêu sau khi học xong Giai đoạn 3
+- Bạn tự tạo được store với `configureStore`.
+- Bạn viết được slice có action + reducer rõ ràng.
+- Bạn viết được `createAsyncThunk` để gọi API.
+- Bạn kết nối RTK vào Next.js App Router đúng vị trí.
+- Bạn hiểu khi nào dùng RTK, khi nào không cần.
 
 ---
 
-#### Phan 1 - Tu duy RTK trong du an Next.js
+#### Phần 1 - Tư duy RTK trong dự án Next.js
 
-- RTK dung de quan ly global state (state dung chung nhieu noi).
-- Khong phai cai gi cung dua vao RTK.
+- RTK dùng để quản lý global state (state dùng chung nhiều nơi).
+- Không phải cái gì cũng đưa vào RTK.
 - Trong App Router:
-  - Du lieu render lan dau co the fetch o Server Component.
-  - State tuong tac nguoi dung (gio hang, bo loc, UI state,...) hop voi RTK.
+  - Dữ liệu render lần đầu có thể fetch ở Server Component.
+  - State tương tác người dùng (giỏ hàng, bộ lọc, UI state,...) hợp với RTK.
 
-Quy tac de nho:
-- Local state nho -> `useState`.
-- State chia se phuc tap -> RTK.
+Quy tắc dễ nhớ:
+- Local state nhỏ -> `useState`.
+- State chia sẻ phức tạp -> RTK.
 
 ---
 
-#### Phan 2 - Cau truc folder goi y (de de quan ly)
+#### Phần 2 - Cấu trúc folder gợi ý (để dễ quản lý)
 
 ```txt
 src/
@@ -1116,15 +1116,15 @@ app/
   layout.tsx
 ```
 
-Y nghia:
-- `store.ts`: tao store tong.
-- `hooks.ts`: typed hooks de dung an toan voi TS.
-- `todoSlice.ts`: noi viet state + reducer + action cho module todo.
-- `StoreProvider.tsx`: bo Redux Provider vao app.
+Ý nghĩa:
+- `store.ts`: tạo store tổng.
+- `hooks.ts`: typed hooks để dùng an toàn với TS.
+- `todoSlice.ts`: nơi viết state + reducer + action cho module todo.
+- `StoreProvider.tsx`: bọc Redux Provider vào app.
 
 ---
 
-#### Phan 3 - Tao store dung chuan TypeScript
+#### Phần 3 - Tạo store đúng chuẩn TypeScript
 
 `src/store/store.ts`
 
@@ -1142,13 +1142,13 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-Giai thich:
-- `todo` la key state trong store, sau nay doc bang `state.todo`.
-- `RootState`, `AppDispatch` la type can thiet cho typed hooks.
+Giải thích:
+- `todo` là key state trong store, sau này đọc bằng `state.todo`.
+- `RootState`, `AppDispatch` là type cần thiết cho typed hooks.
 
 ---
 
-#### Phan 4 - Typed hooks (rat nen dung)
+#### Phần 4 - Typed hooks (rất nên dùng)
 
 `src/store/hooks.ts`
 
@@ -1160,13 +1160,13 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 ```
 
-Vi sao can:
-- Tranh phai ep kieu thu cong moi lan dung.
-- TypeScript goi y dung, bat loi som.
+Vì sao cần:
+- Tránh phải ép kiểu thủ công mỗi lần dùng.
+- TypeScript gợi ý đúng, bắt lỗi sớm.
 
 ---
 
-#### Phan 5 - Tao slice (state + reducer + action)
+#### Phần 5 - Tạo slice (state + reducer + action)
 
 `src/store/features/todo/todoSlice.ts`
 
@@ -1212,15 +1212,15 @@ export const { addTodo, toggleTodo, removeTodo } = todoSlice.actions;
 export default todoSlice.reducer;
 ```
 
-Giai thich:
-- Reducer trong RTK cho phep "viet giong nhu mutate" nhung ben trong da immutable.
-- `PayloadAction<T>` giup action payload co type ro rang.
+Giải thích:
+- Reducer trong RTK cho phép "viết giống như mutate" nhưng bên trong đã immutable.
+- `PayloadAction<T>` giúp action payload có type rõ ràng.
 
 ---
 
-#### Phan 6 - Async voi createAsyncThunk
+#### Phần 6 - Async với createAsyncThunk
 
-`src/store/features/todo/todoSlice.ts` (ban nang cao)
+`src/store/features/todo/todoSlice.ts` (bản nâng cao)
 
 ```ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -1274,7 +1274,7 @@ export default todoSlice.reducer;
 
 ---
 
-#### Phan 7 - Tich hop Redux Provider vao Next.js App Router
+#### Phần 7 - Tích hợp Redux Provider vào Next.js App Router
 
 `src/providers/StoreProvider.tsx`
 
@@ -1313,13 +1313,13 @@ export default function RootLayout({
 }
 ```
 
-Luu y:
-- `Provider` phai dat trong Client Component (`StoreProvider.tsx`).
-- `layout.tsx` co the la Server Component, nhung van wrap duoc client provider.
+Lưu ý:
+- `Provider` phải đặt trong Client Component (`StoreProvider.tsx`).
+- `layout.tsx` có thể là Server Component, nhưng vẫn wrap được client provider.
 
 ---
 
-#### Phan 8 - Su dung state/action trong component
+#### Phần 8 - Sử dụng state/action trong component
 
 ```tsx
 "use client";
@@ -1371,9 +1371,9 @@ export default function TodoPage() {
 
 ---
 
-#### Phan 9 - Selector de tranh lap code
+#### Phần 9 - Selector để tránh lặp code
 
-Trong `todoSlice.ts` hoac file selectors rieng:
+Trong `todoSlice.ts` hoặc file selectors riêng:
 
 ```ts
 import type { RootState } from "@/src/store/store";
@@ -1385,106 +1385,106 @@ export const selectDoneCount = (state: RootState) =>
   state.todo.items.filter((t) => t.done).length;
 ```
 
-Loi ich:
-- De test.
-- De tai su dung.
-- Component gon hon.
+Lợi ích:
+- Dễ test.
+- Dễ tái sử dụng.
+- Component gọn hơn.
 
 ---
 
-#### Phan 10 - Khi nao dung RTK, khi nao khong?
+#### Phần 10 - Khi nào dùng RTK, khi nào không?
 
-Dung RTK khi:
-- Du lieu dung chung nhieu route/component.
-- Co nhieu thao tac cap nhat state phuc tap.
-- Can quan ly loading/error nhat quan.
+Dùng RTK khi:
+- Dữ liệu dùng chung nhiều route/component.
+- Có nhiều thao tác cập nhật state phức tạp.
+- Cần quản lý loading/error nhất quán.
 
-Khong can RTK khi:
-- Form nho trong 1 component.
-- State UI nho (modal open/close).
-- Data co the fetch truc tiep o Server Component ma khong can global.
-
----
-
-#### Phan 11 - Loi thuong gap va cach sua
-
-- Loi: `could not find react-redux context value`
-  - Nguyen nhan: chua wrap Provider.
-  - Cach sua: them `StoreProvider` vao `app/layout.tsx`.
-
-- Loi: `Property 'todo' does not exist on type RootState`
-  - Nguyen nhan: key reducer khong trung.
-  - Cach sua: kiem tra `reducer: { todo: todoReducer }`.
-
-- Loi: Dispatch bi sai type
-  - Nguyen nhan: dung `useDispatch` thuong.
-  - Cach sua: dung `useAppDispatch`.
-
-- Loi: UI khong cap nhat
-  - Nguyen nhan: sua state sai cach ngoai reducer RTK.
-  - Cach sua: chi cap nhat state thong qua action/reducer.
+Không cần RTK khi:
+- Form nhỏ trong 1 component.
+- State UI nhỏ (modal open/close).
+- Data có thể fetch trực tiếp ở Server Component mà không cần global.
 
 ---
 
-#### Phan 12 - Checklist dat chuan Giai doan 3
+#### Phần 11 - Lỗi thường gặp và cách sửa
 
-- [ ] Tao store + hooks typed dung TypeScript.
-- [ ] Tao slice voi `createSlice`.
-- [ ] Tao async logic voi `createAsyncThunk`.
-- [ ] Hien thi loading/error/data day du.
-- [ ] Tich hop Redux Provider dung vi tri trong App Router.
-- [ ] Co selector cho cac du lieu dung nhieu lan.
+- Lỗi: `could not find react-redux context value`
+  - Nguyên nhân: chưa wrap Provider.
+  - Cách sửa: thêm `StoreProvider` vào `app/layout.tsx`.
+
+- Lỗi: `Property 'todo' does not exist on type RootState`
+  - Nguyên nhân: key reducer không trùng.
+  - Cách sửa: kiểm tra `reducer: { todo: todoReducer }`.
+
+- Lỗi: Dispatch bị sai type
+  - Nguyên nhân: dùng `useDispatch` thường.
+  - Cách sửa: dùng `useAppDispatch`.
+
+- Lỗi: UI không cập nhật
+  - Nguyên nhân: sửa state sai cách ngoài reducer RTK.
+  - Cách sửa: chỉ cập nhật state thông qua action/reducer.
 
 ---
 
-#### Phan 13 - Bai tap thuc chien Giai doan 3
+#### Phần 12 - Checklist đạt chuẩn Giai đoạn 3
 
-De bai: Lam module "Cart + Wishlist" voi RTK
+- [ ] Tạo store + hooks typed đúng TypeScript.
+- [ ] Tạo slice với `createSlice`.
+- [ ] Tạo async logic với `createAsyncThunk`.
+- [ ] Hiển thị loading/error/data đầy đủ.
+- [ ] Tích hợp Redux Provider đúng vị trí trong App Router.
+- [ ] Có selector cho các dữ liệu dùng nhiều lần.
 
-Yeu cau:
+---
+
+#### Phần 13 - Bài tập thực chiến Giai đoạn 3
+
+Đề bài: Làm module "Cart + Wishlist" với RTK
+
+Yêu cầu:
 - `cartSlice`: add/remove/change quantity.
-- `wishlistSlice`: add/remove item yeu thich.
-- Hien thi tong so luong cart o header (global state).
-- Luu cart vao `localStorage` (co the dung `useEffect` trong client component de dong bo).
+- `wishlistSlice`: add/remove item yêu thích.
+- Hiển thị tổng số lượng cart ở header (global state).
+- Lưu cart vào `localStorage` (có thể dùng `useEffect` trong client component để đồng bộ).
 
-Nang cao:
-- Tao `createAsyncThunk` fetch danh sach san pham.
-- Khi add cart thi kiem tra da ton tai -> tang quantity.
+Nâng cao:
+- Tạo `createAsyncThunk` fetch danh sách sản phẩm.
+- Khi add cart thì kiểm tra đã tồn tại -> tăng quantity.
 
-Tieu chi dat:
-- Khong dung `any`.
-- Action/reducer dat ten ro rang.
-- TypeScript bat loi som.
+Tiêu chí đạt:
+- Không dùng `any`.
+- Action/reducer đặt tên rõ ràng.
+- TypeScript bắt lỗi sớm.
 
 ---
 
-#### Phan 14 - Mau ghi chu hoc Giai doan 3 (ban dien vao)
+#### Phần 14 - Mẫu ghi chú học Giai đoạn 3 (bạn điền vào)
 
-- Hom nay toi hoc:
+- Hôm nay tôi học:
   - 
-- Dieu toi hieu ro:
+- Điều tôi hiểu rõ:
   - 
-- Dieu toi chua ro:
+- Điều tôi chưa rõ:
   - 
-- Loi toi da gap:
+- Lỗi tôi đã gặp:
   - 
-- Cach toi fix:
+- Cách tôi fix:
   - 
-- 1 dieu toi se ap dung vao project that:
+- 1 điều tôi sẽ áp dụng vào project thật:
   - 
 
-### 4.7 RTK nang cao - Middleware + RTK Query (chi tiet de di project that)
+### 4.7 RTK nâng cao - Middleware + RTK Query (chi tiết để đi project thật)
 
-#### A. Middleware la gi? dung de lam gi?
+#### A. Middleware là gì? dùng để làm gì?
 
-- Middleware la lop nam giua `dispatch(action)` va `reducer`.
-- Dung de:
+- Middleware là lớp nằm giữa `dispatch(action)` và `reducer`.
+- Dùng để:
   - log action/state,
-  - xu ly async flow,
-  - them header/token,
-  - xu ly loi chung.
+  - xử lý async flow,
+  - thêm header/token,
+  - xử lý lỗi chung.
 
-So do:
+Sơ đồ:
 
 ```txt
 UI -> dispatch(action) -> middleware -> reducer -> store update -> UI re-render
@@ -1492,7 +1492,7 @@ UI -> dispatch(action) -> middleware -> reducer -> store update -> UI re-render
 
 ---
 
-#### B. Cach them middleware vao store
+#### B. Cách thêm middleware vào store
 
 `src/store/store.ts`
 
@@ -1520,52 +1520,52 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-Luu y:
-- Luon bat dau tu `getDefaultMiddleware()`.
-- Sau do moi `concat(...)` middleware custom.
-- Khong nen bo middleware mac dinh neu khong co ly do dac biet.
+Lưu ý:
+- Luôn bắt đầu từ `getDefaultMiddleware()`.
+- Sau đó mới `concat(...)` middleware custom.
+- Không nên bỏ middleware mặc định nếu không có lý do đặc biệt.
 
 ---
 
-#### C. Vi du middleware auth token (tu duy)
+#### C. Ví dụ middleware auth token (tư duy)
 
-Muc tieu:
-- Moi request API deu co token neu da dang nhap.
+Mục tiêu:
+- Mỗi request API đều có token nếu đã đăng nhập.
 
-Co 2 huong:
-- Huong 1: middleware can thiep action async.
-- Huong 2 (de hon, de bao tri hon): xu ly token ngay trong `baseQuery` cua RTK Query.
+Có 2 hướng:
+- Hướng 1: middleware can thiệp action async.
+- Hướng 2 (dễ hơn, dễ bảo trì hơn): xử lý token ngay trong `baseQuery` của RTK Query.
 
-Thuc te du an thuong dung huong 2.
+Thực tế dự án thường dùng hướng 2.
 
 ---
 
-#### D. RTK Query la gi?
+#### D. RTK Query là gì?
 
-- RTK Query la cong cu trong Redux Toolkit de fetch/caching data.
-- Giam rat nhieu code thu cong so voi `createAsyncThunk`.
-- Tu dong co:
+- RTK Query là công cụ trong Redux Toolkit để fetch/caching data.
+- Giảm rất nhiều code thủ công so với `createAsyncThunk`.
+- Tự động có:
   - loading/error/data state
   - caching
   - refetch
-  - invalidation bang tags
+  - invalidation bằng tags
 
-Khi nao nen dung:
-- App co nhieu man hinh goi API.
-- Can cache va dong bo du lieu giua nhieu component.
+Khi nào nên dùng:
+- App có nhiều màn hình gọi API.
+- Cần cache và đồng bộ dữ liệu giữa nhiều component.
 
 ---
 
-#### E. Cac thanh phan cot loi cua RTK Query
+#### E. Các thành phần cốt lõi của RTK Query
 
-- `createApi`: tao API service.
-- `baseQuery`: cau hinh request chung.
-- `endpoints`: dinh nghia query/mutation.
+- `createApi`: tạo API service.
+- `baseQuery`: cấu hình request chung.
+- `endpoints`: định nghĩa query/mutation.
 - `tagTypes` + `providesTags` + `invalidatesTags`: cache invalidation.
 
 ---
 
-#### F. Tao API service voi `createApi`
+#### F. Tạo API service với `createApi`
 
 `src/store/services/productApi.ts`
 
@@ -1624,7 +1624,7 @@ export const {
 
 ---
 
-#### G. Ket noi RTK Query vao store
+#### G. Kết nối RTK Query vào store
 
 `src/store/store.ts`
 
@@ -1646,14 +1646,14 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 ```
 
-Luu y quan trong:
-- RTK Query bat buoc them ca:
+Lưu ý quan trọng:
+- RTK Query bắt buộc thêm cả:
   - `productApi.reducer`
   - `productApi.middleware`
 
 ---
 
-#### H. Su dung hooks cua RTK Query trong component
+#### H. Sử dụng hooks của RTK Query trong component
 
 ```tsx
 "use client";
@@ -1700,80 +1700,80 @@ export default function ProductList() {
 
 ---
 
-#### I. So sanh nhanh: `createAsyncThunk` vs `RTK Query`
+#### I. So sánh nhanh: `createAsyncThunk` vs `RTK Query`
 
 - `createAsyncThunk`
-  - Linh hoat cao.
-  - Phai tu viet loading/error/data reducers.
-  - Hop voi logic async phuc tap, khong chi fetch CRUD.
+  - Linh hoạt cao.
+  - Phải tự viết loading/error/data reducers.
+  - Hợp với logic async phức tạp, không chỉ fetch CRUD.
 
 - `RTK Query`
-  - Cuc nhanh cho fetch API CRUD.
-  - Tu co hooks + cache + invalidation.
-  - Giam nhieu code lap lai.
+  - Cực nhanh cho fetch API CRUD.
+  - Tự có hooks + cache + invalidation.
+  - Giảm nhiều code lặp lại.
 
-Goi y:
-- App hien dai, nhieu API: uu tien RTK Query cho server state.
-- Client state thuong truc (theme, ui, wizard step): de o slice thuong.
-
----
-
-#### J. Checklist dat chuan RTK nang cao
-
-- [ ] Biet middleware nam o dau trong data flow Redux.
-- [ ] Them middleware custom dung cach voi `getDefaultMiddleware`.
-- [ ] Tao duoc 1 `createApi` service.
-- [ ] Ket noi duoc `api.reducer` + `api.middleware`.
-- [ ] Dung duoc query hook + mutation hook.
-- [ ] Hieu `providesTags/invalidatesTags` de refetch dung luc.
+Gợi ý:
+- App hiện đại, nhiều API: ưu tiên RTK Query cho server state.
+- Client state thường trực (theme, ui, wizard step): để ở slice thường.
 
 ---
 
-#### K. Bai tap thuc chien (lam de nho rat lau)
+#### J. Checklist đạt chuẩn RTK nâng cao
 
-De bai:
-- Tao `postApi` voi cac endpoint:
+- [ ] Biết middleware nằm ở đâu trong data flow Redux.
+- [ ] Thêm middleware custom đúng cách với `getDefaultMiddleware`.
+- [ ] Tạo được 1 `createApi` service.
+- [ ] Kết nối được `api.reducer` + `api.middleware`.
+- [ ] Dùng được query hook + mutation hook.
+- [ ] Hiểu `providesTags/invalidatesTags` để refetch đúng lúc.
+
+---
+
+#### K. Bài tập thực chiến (làm để nhớ rất lâu)
+
+Đề bài:
+- Tạo `postApi` với các endpoint:
   - `getPosts`
   - `getPostById`
   - `createPost`
   - `updatePost`
   - `deletePost`
-- Co tag invalidation de sau khi tao/sua/xoa thi danh sach tu refresh.
-- Tao 1 trang hien thi danh sach + form tao post.
+- Có tag invalidation để sau khi tạo/sửa/xoá thì danh sách tự refresh.
+- Tạo 1 trang hiển thị danh sách + form tạo post.
 
-Muc tieu:
-- Vua hieu RTK Query,
-- vua biet cach to chuc store sach trong Next.js.
-
----
-
-## 5) GIAI DOAN 4 - Project thuc chien (CRUD)
-
-### 5.1 Muc tieu Giai doan 4
-
-Sau khi hoc xong giai doan nay, ban co the:
-- Tu tao 1 project Next.js App Router hoan chinh tu dau.
-- Biet to chuc folder, tach component, viet logic sach.
-- Ket hop Server Component + Client Component + RTK dung cho.
-- Tu tin lam duoc project tuong tu trong thuc te.
+Mục tiêu:
+- Vừa hiểu RTK Query,
+- vừa biết cách tổ chức store sạch trong Next.js.
 
 ---
 
-### 5.2 De bai: App Quan ly cong viec (Task Manager)
+## 5) GIAI ĐOẠN 4 - Project thực chiến (CRUD)
 
-Chuc nang:
-- Xem danh sach task.
-- Them task moi.
-- Sua task.
-- Xoa task.
-- Loc task theo trang thai: Tat ca / Dang lam / Da xong.
-- Tim kiem task theo ten.
-- Hien thi loading khi dang tai du lieu.
-- Hien thi loi khi co van de.
+### 5.1 Mục tiêu Giai đoạn 4
+
+Sau khi học xong giai đoạn này, bạn có thể:
+- Tự tạo 1 project Next.js App Router hoàn chỉnh từ đầu.
+- Biết tổ chức folder, tách component, viết logic sạch.
+- Kết hợp Server Component + Client Component + RTK đúng chỗ.
+- Tự tin làm được project tương tự trong thực tế.
 
 ---
 
-### 5.3 Cau truc folder goi y (de de bao tri)
+### 5.2 Đề bài: App Quản lý công việc (Task Manager)
+
+Chức năng:
+- Xem danh sách task.
+- Thêm task mới.
+- Sửa task.
+- Xoá task.
+- Lọc task theo trạng thái: Tất cả / Đang làm / Đã xong.
+- Tìm kiếm task theo tên.
+- Hiển thị loading khi đang tải dữ liệu.
+- Hiển thị lỗi khi có vấn đề.
+
+---
+
+### 5.3 Cấu trúc folder gợi ý (để dễ bảo trì)
 
 ```txt
 app/
@@ -1807,15 +1807,15 @@ src/
     task.ts
 ```
 
-Giai thich:
-- `app/` chua route va layout.
-- `src/components/` chua cac component tai su dung.
-- `src/store/` chua toan bo logic RTK.
-- `src/types/` chua type chung.
+Giải thích:
+- `app/` chứa route và layout.
+- `src/components/` chứa các component tái sử dụng.
+- `src/store/` chứa toàn bộ logic RTK.
+- `src/types/` chứa type chung.
 
 ---
 
-### 5.4 Buoc 1 - Dinh nghia type chung
+### 5.4 Bước 1 - Định nghĩa type chung
 
 `src/types/task.ts`
 
@@ -1831,7 +1831,7 @@ export type Task = {
 
 ---
 
-### 5.5 Buoc 2 - Tao RTK Query API service
+### 5.5 Bước 2 - Tạo RTK Query API service
 
 `src/store/services/taskApi.ts`
 
@@ -1892,7 +1892,7 @@ export const {
 
 ---
 
-### 5.6 Buoc 3 - Tao UI state slice (loc, tim kiem)
+### 5.6 Bước 3 - Tạo UI state slice (lọc, tìm kiếm)
 
 `src/store/features/task/taskSlice.ts`
 
@@ -1929,7 +1929,7 @@ export default taskFilterSlice.reducer;
 
 ---
 
-### 5.7 Buoc 4 - Cau hinh store
+### 5.7 Bước 4 - Cấu hình store
 
 `src/store/store.ts`
 
@@ -1963,7 +1963,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 ---
 
-### 5.8 Buoc 5 - StoreProvider
+### 5.8 Bước 5 - StoreProvider
 
 `src/providers/StoreProvider.tsx`
 
@@ -1980,7 +1980,7 @@ export default function StoreProvider({ children }: { children: React.ReactNode 
 
 ---
 
-### 5.9 Buoc 6 - Layout goc
+### 5.9 Bước 6 - Layout gốc
 
 `app/layout.tsx`
 
@@ -2005,7 +2005,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ---
 
-### 5.10 Buoc 7 - Cac component
+### 5.10 Bước 7 - Các component
 
 #### `src/components/SearchBox.tsx`
 
@@ -2175,7 +2175,7 @@ export default function TaskList() {
 
 ---
 
-### 5.11 Buoc 8 - Trang tasks
+### 5.11 Bước 8 - Trang tasks
 
 `app/tasks/page.tsx`
 
@@ -2223,7 +2223,7 @@ export default function Error({ error, reset }: { error: Error; reset: () => voi
 
 ---
 
-### 5.12 So do luong du lieu toan app
+### 5.12 Sơ đồ luồng dữ liệu toàn app
 
 ```txt
 User click nut "Them task"
@@ -2246,85 +2246,85 @@ User go o tim kiem
 
 ---
 
-### 5.13 Tu duy thiet ke quan trong
+### 5.13 Tư duy thiết kế quan trọng
 
-#### Khi nao dung Server Component?
-- Trang tasks/page.tsx co the la Server Component (khong co hook, chi render component con).
+#### Khi nào dùng Server Component?
+- Trang tasks/page.tsx có thể là Server Component (không có hook, chỉ render component con).
 
-#### Khi nao dung Client Component?
+#### Khi nào dùng Client Component?
 - TaskForm, TaskList, TaskItem, SearchBox, TaskFilter
-  (vi co hook, event, state).
+  (vì có hook, event, state).
 
-#### Khi nao dung RTK?
-- Filter (keyword, status) dung chung nhieu component -> RTK slice.
-- Data tasks tu API -> RTK Query (cache + refetch).
+#### Khi nào dùng RTK?
+- Filter (keyword, status) dùng chung nhiều component -> RTK slice.
+- Data tasks từ API -> RTK Query (cache + refetch).
 
-#### Khi nao KHONG can RTK?
-- Input tam trong form (title, desc) -> `useState` local la du.
-
----
-
-### 5.14 Loi thuong gap trong project that
-
-- Loi: Component client import trong server component -> warning hydration
-  - Cach sua: dam bao component client co `"use client"`.
-
-- Loi: Mutation khong refetch list
-  - Cach sua: kiem tra `invalidatesTags` trung voi `providesTags`.
-
-- Loi: Filter khong hoat dong
-  - Cach sua: kiem tra selector doc dung key (`state.taskFilter`).
-
-- Loi: TypeScript bao loi `any` nhieu
-  - Cach sua: dinh nghia type ro rang o `src/types/`.
+#### Khi nào KHÔNG cần RTK?
+- Input tạm trong form (title, desc) -> `useState` local là đủ.
 
 ---
 
-### 5.15 Checklist hoan thanh project
+### 5.14 Lỗi thường gặp trong project thật
 
-- [ ] Cau truc folder sach, de hieu.
-- [ ] Co type rieng trong `src/types/`.
-- [ ] RTK Query CRUD day du.
-- [ ] Filter (keyword + status) hoat dong.
-- [ ] loading.tsx + error.tsx co cho route tasks.
-- [ ] Khong dung `any`.
-- [ ] Component tach nho, tai su dung duoc.
-- [ ] Code chay on dinh, khong loi console.
+- Lỗi: Component client import trong server component -> warning hydration
+  - Cách sửa: đảm bảo component client có `"use client"`.
 
----
+- Lỗi: Mutation không refetch list
+  - Cách sửa: kiểm tra `invalidatesTags` trùng với `providesTags`.
 
-### 5.16 Nang cao (lam them neu muon gioi hon)
+- Lỗi: Filter không hoạt động
+  - Cách sửa: kiểm tra selector đọc đúng key (`state.taskFilter`).
 
-- Them phan trang (pagination).
-- Them confirm dialog truoc khi xoa.
-- Them toast thong bao thanh cong/loi.
-- Them dark mode bang `useContext` hoac CSS variable.
-- Deploy len Vercel.
+- Lỗi: TypeScript báo lỗi `any` nhiều
+  - Cách sửa: định nghĩa type rõ ràng ở `src/types/`.
 
 ---
 
-### 5.17 Ghi chu ca nhan (tu dien)
+### 5.15 Checklist hoàn thành project
 
-- Chuc nang toi da xong:
+- [ ] Cấu trúc folder sạch, dễ hiểu.
+- [ ] Có type riêng trong `src/types/`.
+- [ ] RTK Query CRUD đầy đủ.
+- [ ] Filter (keyword + status) hoạt động.
+- [ ] loading.tsx + error.tsx có cho route tasks.
+- [ ] Không dùng `any`.
+- [ ] Component tách nhỏ, tái sử dụng được.
+- [ ] Code chạy ổn định, không lỗi console.
+
+---
+
+### 5.16 Nâng cao (làm thêm nếu muốn giỏi hơn)
+
+- Thêm phân trang (pagination).
+- Thêm confirm dialog trước khi xoá.
+- Thêm toast thông báo thành công/lỗi.
+- Thêm dark mode bằng `useContext` hoặc CSS variable.
+- Deploy lên Vercel.
+
+---
+
+### 5.17 Ghi chú cá nhân (tự điền)
+
+- Chức năng tôi đã xong:
   - 
-- Chuc nang con thieu:
+- Chức năng còn thiếu:
   - 
-- Bug da gap:
+- Bug đã gặp:
   - 
-- Cach toi fix:
+- Cách tôi fix:
   - 
-- Dieu toi hoc duoc nhieu nhat tu project nay:
+- Điều tôi học được nhiều nhất từ project này:
   - 
 
 ---
 
-## 5B) BO SUNG - Cat giao dien, Hooks nang cao, Next.js tien ich
+## 5B) BỔ SUNG - Cắt giao diện, Hooks nâng cao, Next.js tiện ích
 
-### 5B.1 Tu duy cat giao dien tu design (Figma -> Code)
+### 5B.1 Tư duy cắt giao diện từ design (Figma -> Code)
 
-#### Buoc 1: Nhin tong the -> chia vung lon
+#### Bước 1: Nhìn tổng thể -> chia vùng lớn
 
-Vi du nhin 1 trang web:
+Ví dụ nhìn 1 trang web:
 
 ```txt
 +------------------------------------------+
@@ -2339,15 +2339,15 @@ Vi du nhin 1 trang web:
 +------------------------------------------+
 ```
 
-Chia thanh component:
+Chia thành component:
 - `Header`
-- `Sidebar` (chua `NavItem`)
-- `MainContent` (chua `Card`)
+- `Sidebar` (chứa `NavItem`)
+- `MainContent` (chứa `Card`)
 - `Footer`
 
-#### Buoc 2: Moi vung lon -> tach component con
+#### Bước 2: Mỗi vùng lớn -> tách component con
 
-Vi du `Header`:
+Ví dụ `Header`:
 
 ```txt
 Header
@@ -2356,7 +2356,7 @@ Header
   -> UserAvatar
 ```
 
-#### Buoc 3: Xac dinh props cho moi component
+#### Bước 3: Xác định props cho mỗi component
 
 ```tsx
 type CardProps = {
@@ -2367,20 +2367,20 @@ type CardProps = {
 };
 ```
 
-#### Buoc 4: Style roi ghep lai
+#### Bước 4: Style rồi ghép lại
 
-Quy tac vang:
-- Component nao lap lai -> tach rieng.
-- Component nao co state rieng -> Client Component.
-- Component nao chi hien thi -> co the la Server Component.
+Quy tắc vàng:
+- Component nào lặp lại -> tách riêng.
+- Component nào có state riêng -> Client Component.
+- Component nào chỉ hiển thị -> có thể là Server Component.
 
 ---
 
-### 5B.2 CSS trong Next.js (3 cach chinh)
+### 5B.2 CSS trong Next.js (3 cách chính)
 
-#### Cach 1: CSS Modules (mac dinh, khong can cai them)
+#### Cách 1: CSS Modules (mặc định, không cần cài thêm)
 
-Tao file: `TaskItem.module.css`
+Tạo file: `TaskItem.module.css`
 
 ```css
 .item {
@@ -2397,7 +2397,7 @@ Tao file: `TaskItem.module.css`
 }
 ```
 
-Dung trong component:
+Dùng trong component:
 
 ```tsx
 import styles from "./TaskItem.module.css";
@@ -2411,15 +2411,15 @@ export default function TaskItem({ title, isDone }: { title: string; isDone: boo
 }
 ```
 
-Loi ich:
-- Class tu dong khong trung ten (scoped).
-- Khong anh huong component khac.
+Lợi ích:
+- Class tự động không trùng tên (scoped).
+- Không ảnh hưởng component khác.
 
-#### Cach 2: Tailwind CSS (pho bien nhat hien nay)
+#### Cách 2: Tailwind CSS (phổ biến nhất hiện nay)
 
-Cai dat: khi tao project Next.js chon "Yes" cho Tailwind.
+Cài đặt: khi tạo project Next.js chọn "Yes" cho Tailwind.
 
-Vi du:
+Ví dụ:
 
 ```tsx
 export default function TaskItem({ title, isDone }: { title: string; isDone: boolean }) {
@@ -2431,11 +2431,11 @@ export default function TaskItem({ title, isDone }: { title: string; isDone: boo
 }
 ```
 
-Loi ich:
-- Viet style nhanh, khong tao file CSS rieng.
-- Responsive de: `md:flex-row`, `lg:text-xl`.
+Lợi ích:
+- Viết style nhanh, không tạo file CSS riêng.
+- Responsive dễ: `md:flex-row`, `lg:text-xl`.
 
-Vi du responsive:
+Ví dụ responsive:
 
 ```tsx
 <div className="flex flex-col md:flex-row gap-4">
@@ -2444,7 +2444,7 @@ Vi du responsive:
 </div>
 ```
 
-#### Cach 3: Inline style (chi dung khi rat don gian)
+#### Cách 3: Inline style (chỉ dùng khi rất đơn giản)
 
 ```tsx
 <div style={{ padding: 16, backgroundColor: "#f5f5f5" }}>
@@ -2452,23 +2452,23 @@ Vi du responsive:
 </div>
 ```
 
-#### Nen dung cach nao?
+#### Nên dùng cách nào?
 
-- Du an moi, team thich utility -> Tailwind.
-- Du an can CSS truyen thong, scoped -> CSS Modules.
-- Tranh inline style cho layout phuc tap.
+- Dự án mới, team thích utility -> Tailwind.
+- Dự án cần CSS truyền thống, scoped -> CSS Modules.
+- Tránh inline style cho layout phức tạp.
 
 ---
 
-### 5B.3 `next/image` - Hien thi anh toi uu
+### 5B.3 `next/image` - Hiển thị ảnh tối ưu
 
-#### Vi sao khong dung the `<img>` thuong?
-- `next/image` tu dong:
-  - Lazy load (chi tai khi cuon toi).
-  - Resize theo man hinh.
-  - Toi uu dung luong anh.
+#### Vì sao không dùng thẻ `<img>` thường?
+- `next/image` tự động:
+  - Lazy load (chỉ tải khi cuộn tới).
+  - Resize theo màn hình.
+  - Tối ưu dung lượng ảnh.
 
-#### Vi du co ban
+#### Ví dụ cơ bản
 
 ```tsx
 import Image from "next/image";
@@ -2485,9 +2485,9 @@ export default function ProductCard() {
 }
 ```
 
-#### Vi du anh tu URL ngoai
+#### Ví dụ ảnh từ URL ngoài
 
-Buoc 1: cau hinh `next.config.ts` (hoac `next.config.js`):
+Bước 1: cấu hình `next.config.ts` (hoặc `next.config.js`):
 
 ```ts
 const nextConfig = {
@@ -2500,7 +2500,7 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-Buoc 2: dung trong component:
+Bước 2: dùng trong component:
 
 ```tsx
 <Image
@@ -2511,7 +2511,7 @@ Buoc 2: dung trong component:
 />
 ```
 
-#### Vi du anh full width (responsive)
+#### Ví dụ ảnh full width (responsive)
 
 ```tsx
 <Image
@@ -2522,13 +2522,13 @@ Buoc 2: dung trong component:
 />
 ```
 
-Luu y: container cha phai co `position: relative` va kich thuoc ro rang.
+Lưu ý: container cha phải có `position: relative` và kích thước rõ ràng.
 
 ---
 
-### 5B.4 `next/link` - Dieu huong nhanh khong reload trang
+### 5B.4 `next/link` - Điều hướng nhanh không reload trang
 
-#### Vi du co ban
+#### Ví dụ cơ bản
 
 ```tsx
 import Link from "next/link";
@@ -2544,11 +2544,11 @@ export default function Nav() {
 }
 ```
 
-#### So voi the `<a>`?
-- `<a>` reload toan trang.
-- `<Link>` chi doi phan noi dung, giu nguyen layout -> nhanh hon nhieu.
+#### So với thẻ `<a>`?
+- `<a>` reload toàn trang.
+- `<Link>` chỉ đổi phần nội dung, giữ nguyên layout -> nhanh hơn nhiều.
 
-#### Vi du voi query string
+#### Ví dụ với query string
 
 ```tsx
 <Link href={{ pathname: "/tasks", query: { status: "done" } }}>
@@ -2558,9 +2558,9 @@ export default function Nav() {
 
 ---
 
-### 5B.5 `next/font` - Font chu toi uu
+### 5B.5 `next/font` - Font chữ tối ưu
 
-#### Vi du Google Font
+#### Ví dụ Google Font
 
 ```tsx
 // app/layout.tsx
@@ -2577,15 +2577,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-Loi ich:
-- Font duoc tai ve luc build, khong phu thuoc CDN.
-- Khong bi nhay layout (FOUT/FOIT).
+Lợi ích:
+- Font được tải về lúc build, không phụ thuộc CDN.
+- Không bị nhảy layout (FOUT/FOIT).
 
 ---
 
-### 5B.6 Metadata va SEO
+### 5B.6 Metadata và SEO
 
-#### Static metadata (khai bao truc tiep)
+#### Static metadata (khai báo trực tiếp)
 
 ```tsx
 // app/page.tsx
@@ -2601,7 +2601,7 @@ export default function HomePage() {
 }
 ```
 
-#### Dynamic metadata (theo du lieu)
+#### Dynamic metadata (theo dữ liệu)
 
 ```tsx
 // app/tasks/[id]/page.tsx
@@ -2621,20 +2621,20 @@ export default function TaskDetailPage({ params }: Props) {
 }
 ```
 
-Luu y:
-- `metadata` va `generateMetadata` chi dung trong Server Component.
-- Moi page nen co title + description rieng.
+Lưu ý:
+- `metadata` và `generateMetadata` chỉ dùng trong Server Component.
+- Mỗi page nên có title + description riêng.
 
 ---
 
-### 5B.7 Hook `useReducer` (quan ly state phuc tap)
+### 5B.7 Hook `useReducer` (quản lý state phức tạp)
 
-#### Khi nao dung?
-- State co nhieu field lien quan nhau.
-- Co nhieu loai action khac nhau.
-- Logic cap nhat phuc tap hon `useState`.
+#### Khi nào dùng?
+- State có nhiều field liên quan nhau.
+- Có nhiều loại action khác nhau.
+- Logic cập nhật phức tạp hơn `useState`.
 
-#### Vi du: Form nhieu buoc (wizard)
+#### Ví dụ: Form nhiều bước (wizard)
 
 ```tsx
 "use client";
@@ -2707,21 +2707,21 @@ export default function WizardForm() {
 }
 ```
 
-#### So sanh `useState` vs `useReducer`
+#### So sánh `useState` vs `useReducer`
 
-- `useState`: state don gian, 1-2 gia tri.
-- `useReducer`: state co nhieu field, nhieu loai cap nhat, logic phuc tap.
+- `useState`: state đơn giản, 1-2 giá trị.
+- `useReducer`: state có nhiều field, nhiều loại cập nhật, logic phức tạp.
 
 ---
 
-### 5B.8 Custom Hooks (tai su dung logic)
+### 5B.8 Custom Hooks (tái sử dụng logic)
 
-#### Custom hook la gi?
-- La ham bat dau bang `use...`.
-- Ben trong dung cac hook khac.
-- Muc dich: gom logic lai, tai su dung o nhieu component.
+#### Custom hook là gì?
+- Là hàm bắt đầu bằng `use...`.
+- Bên trong dùng các hook khác.
+- Mục đích: gom logic lại, tái sử dụng ở nhiều component.
 
-#### Vi du 1: `useLocalStorage`
+#### Ví dụ 1: `useLocalStorage`
 
 ```ts
 "use client";
@@ -2743,13 +2743,13 @@ export function useLocalStorage<T>(key: string, defaultValue: T) {
 }
 ```
 
-Dung:
+Dùng:
 
 ```tsx
 const [tasks, setTasks] = useLocalStorage<string[]>("tasks", []);
 ```
 
-#### Vi du 2: `useDebounce`
+#### Ví dụ 2: `useDebounce`
 
 ```ts
 "use client";
@@ -2767,7 +2767,7 @@ export function useDebounce<T>(value: T, delay: number): T {
 }
 ```
 
-Dung:
+Dùng:
 
 ```tsx
 const [q, setQ] = useState("");
@@ -2775,7 +2775,7 @@ const debouncedQ = useDebounce(q, 300);
 // dung debouncedQ de goi API, tranh goi qua nhieu lan
 ```
 
-#### Vi du 3: `useToggle`
+#### Ví dụ 3: `useToggle`
 
 ```ts
 "use client";
@@ -2788,7 +2788,7 @@ export function useToggle(initial = false) {
 }
 ```
 
-Dung:
+Dùng:
 
 ```tsx
 const [isOpen, toggleOpen] = useToggle();
@@ -2796,28 +2796,28 @@ const [isOpen, toggleOpen] = useToggle();
 <button onClick={toggleOpen}>{isOpen ? "Dong" : "Mo"}</button>
 ```
 
-#### Quy tac viet custom hook
-- Ten bat dau bang `use`.
-- Chi goi hook khac ben trong (khong goi trong if/for).
-- Tra ve gia tri + ham cap nhat.
-- Dat trong folder `src/hooks/`.
+#### Quy tắc viết custom hook
+- Tên bắt đầu bằng `use`.
+- Chỉ gọi hook khác bên trong (không gọi trong if/for).
+- Trả về giá trị + hàm cập nhật.
+- Đặt trong folder `src/hooks/`.
 
 ---
 
-### 5B.9 Checklist bo sung (ban kiem tra)
+### 5B.9 Checklist bổ sung (bạn kiểm tra)
 
-- [ ] Biet cat giao dien tu design thanh component.
-- [ ] Dung duoc CSS Modules hoac Tailwind.
-- [ ] Dung duoc `next/image`, `next/link`, `next/font`.
-- [ ] Them metadata/SEO cho tung trang.
-- [ ] Dung duoc `useReducer` cho state phuc tap.
-- [ ] Tu viet duoc custom hook.
+- [ ] Biết cắt giao diện từ design thành component.
+- [ ] Dùng được CSS Modules hoặc Tailwind.
+- [ ] Dùng được `next/image`, `next/link`, `next/font`.
+- [ ] Thêm metadata/SEO cho từng trang.
+- [ ] Dùng được `useReducer` cho state phức tạp.
+- [ ] Tự viết được custom hook.
 
 ---
 
-### 5B.10 SEO chuan trong Next.js App Router (day du de len production)
+### 5B.10 SEO chuẩn trong Next.js App Router (đầy đủ để lên production)
 
-#### A. Tong quan: Website chuan SEO can nhung gi?
+#### A. Tổng quan: Website chuẩn SEO cần những gì?
 
 ```txt
 1. Title + Description moi trang (metadata)
@@ -2833,7 +2833,7 @@ const [isOpen, toggleOpen] = useToggle();
 
 ---
 
-#### B. Open Graph + Twitter Card (chia se mang xa hoi)
+#### B. Open Graph + Twitter Card (chia sẻ mạng xã hội)
 
 ```tsx
 // app/page.tsx
@@ -2866,11 +2866,11 @@ export const metadata: Metadata = {
 };
 ```
 
-Khi share link len Facebook/Zalo se hien anh + mo ta dep.
+Khi share link lên Facebook/Zalo sẽ hiện ảnh + mô tả đẹp.
 
 ---
 
-#### C. Dynamic Open Graph (theo du lieu)
+#### C. Dynamic Open Graph (theo dữ liệu)
 
 ```tsx
 // app/tasks/[id]/page.tsx
@@ -2896,15 +2896,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 ---
 
-#### D. Semantic HTML (rat quan trong cho SEO)
+#### D. Semantic HTML (rất quan trọng cho SEO)
 
-Quy tac:
-- Moi trang chi co 1 the `<h1>`.
-- Thu tu: `h1 > h2 > h3`, khong nhay cap.
-- Anh luon co `alt` mo ta.
-- Dung `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>` thay vi `<div>` khi co the.
+Quy tắc:
+- Mỗi trang chỉ có 1 thẻ `<h1>`.
+- Thứ tự: `h1 > h2 > h3`, không nhảy cấp.
+- Ảnh luôn có `alt` mô tả.
+- Dùng `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>` thay vì `<div>` khi có thể.
 
-Vi du dung:
+Ví dụ đúng:
 
 ```tsx
 export default function ProductPage() {
@@ -2926,7 +2926,7 @@ export default function ProductPage() {
 }
 ```
 
-Vi du sai:
+Ví dụ sai:
 
 ```tsx
 <div>
@@ -2938,7 +2938,7 @@ Vi du sai:
 
 ---
 
-#### E. sitemap.xml (ban do web cho Google)
+#### E. sitemap.xml (bản đồ web cho Google)
 
 `app/sitemap.ts`
 
@@ -2969,9 +2969,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 }
 ```
 
-Next.js tu dong tao file `/sitemap.xml` khi deploy.
+Next.js tự động tạo file `/sitemap.xml` khi deploy.
 
-#### Sitemap dong (nhieu trang tu database)
+#### Sitemap động (nhiều trang từ database)
 
 ```ts
 import type { MetadataRoute } from "next";
@@ -2996,7 +2996,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 ---
 
-#### F. robots.txt (chi dan cho bot)
+#### F. robots.txt (chỉ dẫn cho bot)
 
 `app/robots.ts`
 
@@ -3015,11 +3015,11 @@ export default function robots(): MetadataRoute.Robots {
 }
 ```
 
-Next.js tu dong tao `/robots.txt`.
+Next.js tự động tạo `/robots.txt`.
 
 ---
 
-#### G. Canonical URL (tranh trung noi dung)
+#### G. Canonical URL (tránh trùng nội dung)
 
 ```tsx
 export const metadata: Metadata = {
@@ -3029,13 +3029,13 @@ export const metadata: Metadata = {
 };
 ```
 
-Khi nao can:
-- 1 noi dung xuat hien tren nhieu URL khac nhau.
-- Vi du: `/tasks` va `/tasks?page=1` cung noi dung -> can canonical.
+Khi nào cần:
+- 1 nội dung xuất hiện trên nhiều URL khác nhau.
+- Ví dụ: `/tasks` và `/tasks?page=1` cùng nội dung -> cần canonical.
 
 ---
 
-#### H. generateStaticParams (tao trang tinh, SEO tot nhat)
+#### H. generateStaticParams (tạo trang tĩnh, SEO tốt nhất)
 
 ```tsx
 // app/tasks/[id]/page.tsx
@@ -3053,14 +3053,14 @@ export default async function TaskDetail({ params }: { params: { id: string } })
 }
 ```
 
-Loi ich:
-- Next.js tao san HTML luc build.
-- Google bot crawl nhanh hon, SEO tot hon.
-- Trang tai cuc nhanh.
+Lợi ích:
+- Next.js tạo sẵn HTML lúc build.
+- Google bot crawl nhanh hơn, SEO tốt hơn.
+- Trang tải cực nhanh.
 
 ---
 
-#### I. Structured Data / JSON-LD (giup Google hieu noi dung)
+#### I. Structured Data / JSON-LD (giúp Google hiểu nội dung)
 
 ```tsx
 export default function ProductPage() {
@@ -3091,27 +3091,27 @@ export default function ProductPage() {
 }
 ```
 
-Khi co JSON-LD, Google co the hien thi rich snippet (gia, sao, hinh anh) ngay tren trang tim kiem.
+Khi có JSON-LD, Google có thể hiển thị rich snippet (giá, sao, hình ảnh) ngay trên trang tìm kiếm.
 
 ---
 
 #### J. Performance / Core Web Vitals
 
-3 chi so Google danh gia:
-- **LCP** (Largest Contentful Paint): noi dung chinh hien thi nhanh.
-  - Dung `next/image` de toi uu anh.
-  - Dung `next/font` de tranh nhay layout.
-  - Uu tien Server Component cho trang dau.
+3 chỉ số Google đánh giá:
+- **LCP** (Largest Contentful Paint): nội dung chính hiển thị nhanh.
+  - Dùng `next/image` để tối ưu ảnh.
+  - Dùng `next/font` để tránh nhảy layout.
+  - Ưu tiên Server Component cho trang đầu.
 
-- **CLS** (Cumulative Layout Shift): trang khong bi nhay khi tai.
-  - Luon dat `width`/`height` cho anh.
-  - Khong insert noi dung dong lam dich layout.
+- **CLS** (Cumulative Layout Shift): trang không bị nhảy khi tải.
+  - Luôn đặt `width`/`height` cho ảnh.
+  - Không insert nội dung động làm dịch layout.
 
-- **INP** (Interaction to Next Paint): tuong tac phan hoi nhanh.
-  - Tranh logic nang trong event handler.
-  - Dung `useTransition` neu can cap nhat state lon.
+- **INP** (Interaction to Next Paint): tương tác phản hồi nhanh.
+  - Tránh logic nặng trong event handler.
+  - Dùng `useTransition` nếu cần cập nhật state lớn.
 
-Vi du `useTransition`:
+Ví dụ `useTransition`:
 
 ```tsx
 "use client";
@@ -3145,52 +3145,52 @@ export default function HeavyFilter({ items }: { items: string[] }) {
 
 ---
 
-#### K. Checklist SEO chuan cho moi trang
+#### K. Checklist SEO chuẩn cho mỗi trang
 
-- [ ] Co `<h1>` duy nhat, heading dung thu tu.
-- [ ] Co title + description (metadata).
-- [ ] Co Open Graph (anh + mo ta).
-- [ ] Anh co `alt`, dung `next/image`.
-- [ ] Co `sitemap.xml` va `robots.txt`.
-- [ ] Trang quan trong co `generateStaticParams`.
-- [ ] Co canonical URL neu can.
+- [ ] Có `<h1>` duy nhất, heading đúng thứ tự.
+- [ ] Có title + description (metadata).
+- [ ] Có Open Graph (ảnh + mô tả).
+- [ ] Ảnh có `alt`, dùng `next/image`.
+- [ ] Có `sitemap.xml` và `robots.txt`.
+- [ ] Trang quan trọng có `generateStaticParams`.
+- [ ] Có canonical URL nếu cần.
 - [ ] HTML semantic (`main`, `nav`, `article`...).
-- [ ] Core Web Vitals dat muc xanh.
+- [ ] Core Web Vitals đạt mức xanh.
 
 ---
 
-### 5B.11 Ghi chu hoc phan bo sung (ban dien vao)
+### 5B.11 Ghi chú học phần bổ sung (bạn điền vào)
 
-- Phan toi hieu ro nhat:
+- Phần tôi hiểu rõ nhất:
   - 
-- Phan toi can on lai:
+- Phần tôi cần ôn lại:
   - 
-- Custom hook toi da tu viet:
+- Custom hook tôi đã tự viết:
   - 
-- Loi thuong gap khi cat giao dien:
+- Lỗi thường gặp khi cắt giao diện:
   - 
-- Dieu toi hoc duoc ve SEO:
+- Điều tôi học được về SEO:
   - 
-
----
-
-## 6) Mau nhat ky hoc tap hang ngay
-
-### Ngay: ____ / ____ / ______
-- Thoi gian hoc: 
-- Muc tieu hom nay: 
-- Phan da hoc: 
-- Dieu hieu ro nhat: 
-- Dieu con mo ho: 
-- Cac cau hoi can hoi them:
-  - 
-- Bai tap da lam:
-  - 
-- Tu danh gia (1-10): 
 
 ---
 
-## 7) Tai nguyen hoc tap goi y
+## 6) Mẫu nhật ký học tập hàng ngày
+
+### Ngày: ____ / ____ / ______
+- Thời gian học: 
+- Mục tiêu hôm nay: 
+- Phần đã học: 
+- Điều hiểu rõ nhất: 
+- Điều còn mơ hồ: 
+- Các câu hỏi cần hỏi thêm:
+  - 
+- Bài tập đã làm:
+  - 
+- Tự đánh giá (1-10): 
+
+---
+
+## 7) Tài nguyên học tập gợi ý
 
 - Next.js docs: https://nextjs.org/docs
 - React docs: https://react.dev
@@ -3199,26 +3199,25 @@ export default function HeavyFilter({ items }: { items: string[] }) {
 
 ---
 
-## 8) Huong dan hoc voi minh (neu ban muon hoc co mentor)
+## 8) Hướng dẫn học với mình (nếu bạn muốn học có mentor)
 
-- Cach hoc:
-  1. Ban hoc 1 muc trong tai lieu.
-  2. Ban gui code bai tap cho minh review.
-  3. Minh sua logic, toi uu, va giai thich lai.
-  4. Ban cap nhat ghi chu vao dung phan trong tai lieu.
+- Cách học:
+  1. Bạn học 1 mục trong tài liệu.
+  2. Bạn gửi code bài tập cho mình review.
+  3. Mình sửa logic, tối ưu, và giải thích lại.
+  4. Bạn cập nhật ghi chú vào đúng phần trong tài liệu.
 
-- Quy tac:
-  - Hoc den dau lam bai den do.
-  - Khong hoc vo toi va.
-  - Luon viet ghi chu theo mau de nho lau.
+- Quy tắc:
+  - Học đến đâu làm bài đến đó.
+  - Không học vô tội vạ.
+  - Luôn viết ghi chú theo mẫu để nhớ lâu.
 
 ---
 
-## 9) Muc tieu cuoi cung
+## 9) Mục tiêu cuối cùng
 
-Sau khi hoc xong tai lieu nay, ban co the:
-- Tu cat duoc giao dien theo Figma co ban.
-- Tu to chuc duoc project Next.js App Router + TypeScript.
-- Dung RTK dung noi dung luc.
-- Viet logic ro rang, de bao tri.
-
+Sau khi học xong tài liệu này, bạn có thể:
+- Tự cắt được giao diện theo Figma cơ bản.
+- Tự tổ chức được project Next.js App Router + TypeScript.
+- Dùng RTK đúng nơi đúng lúc.
+- Viết logic rõ ràng, dễ bảo trì.
